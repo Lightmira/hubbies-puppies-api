@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AnimalRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 use Ramsey\Uuid\UuidInterface;
 
 /**
