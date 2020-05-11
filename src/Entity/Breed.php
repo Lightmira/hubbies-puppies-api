@@ -47,6 +47,7 @@ class Breed
 
     /**
      * @ORM\Column(name="label", type="string", length=100)
+     * @Serializer\SerializedName("label")
      */
     private $label;
 
@@ -101,7 +102,6 @@ class Breed
 
         return $this;
     }
-
 
     public function getLabel(): ?string
     {

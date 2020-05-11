@@ -1,11 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
 use App\Repository\AnimalRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Ramsey\Uuid\UuidInterface;
+use Ramsey\Uuid as Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=AnimalRepository::class)
@@ -20,13 +22,28 @@ class Animal
     private $id;
 
     /**
-     * @var UuidInterface
+     * @var Uuid\UuidInterface
      *
      * @ORM\Column(name="uuid", type="uuid", unique=true)
      * @Serializer\SerializedName("id")
      * @Serializer\Type("uuid")
      */
     private $uuid;
+
+    /**
+     * @ORM\Column(name="dateCreation", type="datetime")
+     */
+    private $dateCreation;
+
+    /**
+     * @ORM\Column(name="dateUpdate", type="datetime", nullable=true)
+     */
+    private $dateUpdate;
+
+    /**
+     * @ORM\Column(name="deleted", type="datetime", nullable=true)
+     */
+    private $deleted;
 
     /**
      * @ORM\Column(name="name", type="string", length=255)
@@ -53,19 +70,54 @@ class Animal
      */
     private $description;
 
+    public function __construct()
+    {
+        $this->uuid = Uuid\Uuid::uuid4();
+        $this->dateCreation = new DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUuid(): ?string
+    public function getUuid(): ?Uuid\UuidInterface
     {
         return $this->uuid;
     }
 
-    public function setUuid(string $uuid): self
+    public function getDateCreation(): ?DateTime
     {
-        $this->uuid = $uuid;
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(DateTime $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    public function getDateUpdate(): ?DateTime
+    {
+        return $this->dateUpdate;
+    }
+
+    public function setDateUpdate(?DateTime $dateUpdate): self
+    {
+        $this->dateUpdate = $dateUpdate;
+
+        return $this;
+    }
+
+    public function getDeleted(): ?DateTime
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(?DateTime $deleted): self
+    {
+        $this->deleted = $deleted;
 
         return $this;
     }

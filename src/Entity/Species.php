@@ -47,6 +47,7 @@ class Species
 
     /**
      * @ORM\Column(name="label", type="string", length=100)
+     * @Serializer\SerializedName("label")
      */
     private $label;
 
