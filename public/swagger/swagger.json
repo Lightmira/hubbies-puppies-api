@@ -1,0 +1,223 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "HUBBIES PUPPIES API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://dev.hubbies-puppies.fr",
+            "description": "HUBBIES PUPPIES DEV API"
+        },
+        {
+            "url": "http://staging.hubbies-puppies.fr",
+            "description": "HUBBIES PUPPIES STAGING PI"
+        },
+        {
+            "url": "http://preprod.hubbies-puppies.fr",
+            "description": "HUBBIES PUPPIES PREPROD API"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Animal": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Milou",
+                        "nullable": false
+                    },
+                    "gender": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Male",
+                            "Female"
+                        ],
+                        "nullable": false
+                    },
+                    "age": {
+                        "type": "integer",
+                        "example": "42",
+                        "nullable": false
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Milou has been found on the street, ...",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Association": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Melt'in Pets",
+                        "nullable": false
+                    },
+                    "logo": {
+                        "type": "string",
+                        "example": "logo.png",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Melt'in Pets has been created in 2005, ...",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "0164585960",
+                        "nullable": false
+                    },
+                    "cellphone": {
+                        "type": "string",
+                        "example": "0664585960",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "contact@metingpets.fr",
+                        "nullable": false
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "42 Queen street",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Breed": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "label": {
+                        "type": "string",
+                        "example": "Berger Allemand",
+                        "nullable": false
+                    }
+                },
+                "type": "object"
+            },
+            "Species": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "label": {
+                        "type": "string",
+                        "example": "Chien",
+                        "nullable": false
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

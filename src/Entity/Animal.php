@@ -7,14 +7,27 @@ use App\Repository\AnimalRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use OpenApi\Annotations as OA;
 use Ramsey\Uuid as Uuid;
 
 /**
+ * @OA\Schema(
+ *     type="object",
+ *     schema="Animal"
+ * )
+ *
+ * @ORM\Table(name="animal")
  * @ORM\Entity(repositoryClass=AnimalRepository::class)
  */
 class Animal
 {
     /**
+     * @OA\Property(
+     *     type="integer",
+     *     property="id",
+     *     nullable=false
+     * )
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -24,6 +37,14 @@ class Animal
     /**
      * @var Uuid\UuidInterface
      *
+     * @OA\Property(
+     *     type="string",
+     *     property="uuid",
+     *     format="uuid",
+     *     example="0b6b9865-4583-48a6-959c-233cef91285a",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="uuid", type="uuid", unique=true)
      * @Serializer\SerializedName("id")
      * @Serializer\Type("uuid")
@@ -31,21 +52,49 @@ class Animal
     private $uuid;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="dateCreation",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="dateUpdate",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="dateUpdate", type="datetime", nullable=true)
      */
     private $dateUpdate;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="deleted",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="deleted", type="datetime", nullable=true)
      */
     private $deleted;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="name",
+     *     example="Milou",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="name", type="string", length=255)
      * @Serializer\SerializedName("name")
      *
@@ -53,18 +102,45 @@ class Animal
     private $name;
 
     /**
+     * @OA\Property(
+     *     type="array",
+     *     property="gender",
+     *     nullable=false,
+     *     @OA\Items(
+     *         type="string"
+     *     ),
+     *     example={
+     *         "Male",
+     *         "Female"
+     *     }
+     * )
+     *
      * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'femele')")
      * @Serializer\SerializedName("gender")
      */
     private $gender;
 
     /**
+     * @OA\Property(
+     *     type="integer",
+     *     property="age",
+     *     example="42",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="age", type="integer")
      * @Serializer\SerializedName("age")
      */
     private $age;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="description",
+     *     example="Milou has been found on the street, ...",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Serializer\SerializedName("description")
      */
