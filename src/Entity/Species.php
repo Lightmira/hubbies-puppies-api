@@ -9,14 +9,27 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use OpenApi\Annotations as OA;
 use Ramsey\Uuid as Uuid;
 
 /**
+ * @OA\Schema(
+ *     type="object",
+ *     schema="Species"
+ * )
+ *
+ * @ORM\Table(name="species")
  * @ORM\Entity(repositoryClass=SpeciesRepository::class)
  */
 class Species
 {
     /**
+     * @OA\Property(
+     *     type="integer",
+     *     property="id",
+     *     nullable=false
+     * )
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -26,6 +39,14 @@ class Species
     /**
      * @var Uuid\UuidInterface
      *
+     * @OA\Property(
+     *     type="string",
+     *     property="uuid",
+     *     format="uuid",
+     *     example="0b6b9865-4583-48a6-959c-233cef91285a",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="uuid", type="uuid", unique=true)
      * @Serializer\SerializedName("id")
      * @Serializer\Type("uuid")
@@ -33,21 +54,49 @@ class Species
     private $uuid;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="dateCreation",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="dateUpdate",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="dateUpdate", type="datetime", nullable=true)
      */
     private $dateUpdate;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="deleted",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="deleted", type="datetime", nullable=true)
      */
     private $deleted;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="label",
+     *     example="Chien",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="label", type="string", length=100)
      * @Serializer\SerializedName("label")
      */

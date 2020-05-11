@@ -9,14 +9,27 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use OpenApi\Annotations as OA;
 use Ramsey\Uuid as Uuid;
 
 /**
+ * @OA\Schema(
+ *     type="object",
+ *     schema="Association"
+ * )
+ *
+ * @ORM\Table(name="association")
  * @ORM\Entity(repositoryClass=AssociationRepository::class)
  */
 class Association
 {
     /**
+     * @OA\Property(
+     *     type="integer",
+     *     property="id",
+     *     nullable=false
+     * )
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -26,6 +39,14 @@ class Association
     /**
      * @var Uuid\UuidInterface
      *
+     * @OA\Property(
+     *     type="string",
+     *     property="uuid",
+     *     format="uuid",
+     *     example="0b6b9865-4583-48a6-959c-233cef91285a",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="uuid", type="uuid", unique=true)
      * @Serializer\SerializedName("id")
      * @Serializer\Type("uuid")
@@ -33,21 +54,49 @@ class Association
     private $uuid;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="dateCreation",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="dateCreation", type="datetime")
      */
     private $dateCreation;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="dateUpdate",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="dateUpdate", type="datetime", nullable=true)
      */
     private $dateUpdate;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="deleted",
+     *     example="2020-05-11T14:00:00",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="deleted", type="datetime", nullable=true)
      */
     private $deleted;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="name",
+     *     example="Melt'in Pets",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="name", type="string", length=255)
      * @Serializer\SerializedName("name")
      *
@@ -55,36 +104,78 @@ class Association
     private $name;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="logo",
+     *     example="logo.png",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="logo", type="string", length=100, nullable=true)
      * @Serializer\SerializedName("logo")
      */
     private $logo;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="description",
+     *     example="Melt'in Pets has been created in 2005, ...",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Serializer\SerializedName("description")
      */
     private $description;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="phone",
+     *     example="0164585960",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="phone", type="string", length=20)
      * @Serializer\SerializedName("phone")
      */
     private $phone;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="cellphone",
+     *     example="0664585960",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="cellphone", type="string", length=20, nullable=true)
      * @Serializer\SerializedName("cellphone")
      */
     private $cellphone;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="email",
+     *     example="contact@metingpets.fr",
+     *     nullable=false
+     * )
+     *
      * @ORM\Column(name="email", type="string", length=100)
      * @Serializer\SerializedName("email")
      */
     private $email;
 
     /**
+     * @OA\Property(
+     *     type="string",
+     *     property="address",
+     *     example="42 Queen street",
+     *     nullable=true
+     * )
+     *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      * @Serializer\SerializedName("address")
      */

@@ -7,6 +7,7 @@ use App\Repository\AnimalRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use OpenApi\Annotations as OA;
 use Ramsey\Uuid as Uuid;
 
 /**
@@ -14,6 +15,7 @@ use Ramsey\Uuid as Uuid;
  *     type="object",
  *     schema="Animal"
  * )
+ *
  * @ORM\Table(name="animal")
  * @ORM\Entity(repositoryClass=AnimalRepository::class)
  */
@@ -111,6 +113,7 @@ class Animal
      *         "Male",
      *         "Female"
      *     }
+     * )
      *
      * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'femele')")
      * @Serializer\SerializedName("gender")
