@@ -70,6 +70,24 @@ class Animal
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Association::class, inversedBy="animals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $association;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Breed::class, inversedBy="animals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $breed;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Species::class, inversedBy="animals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $species;
+
     public function __construct()
     {
         $this->uuid = Uuid\Uuid::uuid4();
@@ -166,6 +184,42 @@ class Animal
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAssociation(): ?Association
+    {
+        return $this->association;
+    }
+
+    public function setAssociation(?Association $association): self
+    {
+        $this->association = $association;
+
+        return $this;
+    }
+
+    public function getBreed(): ?Breed
+    {
+        return $this->breed;
+    }
+
+    public function setBreed(?Breed $breed): self
+    {
+        $this->breed = $breed;
+
+        return $this;
+    }
+
+    public function getSpecies(): ?Species
+    {
+        return $this->species;
+    }
+
+    public function setSpecies(?Species $species): self
+    {
+        $this->species = $species;
 
         return $this;
     }

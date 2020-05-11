@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use App\Repository\AssociationRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Ramsey\Uuid as Uuid;
@@ -88,10 +90,16 @@ class Association
      */
     private $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="association", orphanRemoval=true)
+     */
+    private $animals;
+
     public function __construct()
     {
         $this->uuid = Uuid\Uuid::uuid4();
         $this->dateCreation = new DateTime();
+        $this->animals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,6 +228,37 @@ class Association
     public function setAddress(?string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Animal[]
+     */
+    public function getAnimals(): Collection
+    {
+        return $this->animals;
+    }
+
+    public function addAnimal(Animal $animal): self
+    {
+        if (!$this->animals->contains($animal)) {
+            $this->animals[] = $animal;
+            $animal->setAssociation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimal(Animal $animal): self
+    {
+        if ($this->animals->contains($animal)) {
+            $this->animals->removeElement($animal);
+            // set the owning side to null (unless already changed)
+            if ($animal->getAssociation() === $this) {
+                $animal->setAssociation(null);
+            }
+        }
 
         return $this;
     }
