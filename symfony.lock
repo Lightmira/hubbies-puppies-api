@@ -290,9 +290,6 @@
             "config/routes.yaml"
         ]
     },
-    "symfony/serializer": {
-        "version": "v4.4.8"
-    },
     "symfony/service-contracts": {
         "version": "v2.0.1"
     },
@@ -310,5 +307,8 @@
     },
     "webimpress/safe-writer": {
         "version": "2.0.1"
+    },
+    "zircote/swagger-php": {
+        "version": "3.0.4"
     }
 }
