@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use App\Repository\BreedRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Ramsey\Uuid as Uuid;
@@ -47,13 +49,20 @@ class Breed
 
     /**
      * @ORM\Column(name="label", type="string", length=100)
+     * @Serializer\SerializedName("label")
      */
     private $label;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Animal::class, mappedBy="breed")
+     */
+    private $animals;
 
     public function __construct()
     {
         $this->uuid = Uuid\Uuid::uuid4();
         $this->dateCreation = new DateTime();
+        $this->animals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,7 +111,6 @@ class Breed
         return $this;
     }
 
-
     public function getLabel(): ?string
     {
         return $this->label;
@@ -111,6 +119,37 @@ class Breed
     public function setLabel(string $label): self
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Animal[]
+     */
+    public function getAnimals(): Collection
+    {
+        return $this->animals;
+    }
+
+    public function addAnimal(Animal $animal): self
+    {
+        if (!$this->animals->contains($animal)) {
+            $this->animals[] = $animal;
+            $animal->setBreed($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimal(Animal $animal): self
+    {
+        if ($this->animals->contains($animal)) {
+            $this->animals->removeElement($animal);
+            // set the owning side to null (unless already changed)
+            if ($animal->getBreed() === $this) {
+                $animal->setBreed(null);
+            }
+        }
 
         return $this;
     }
