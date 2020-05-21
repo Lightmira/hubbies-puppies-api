@@ -31,9 +31,9 @@ start: docker-compose.override.yml
 	$(DC) build
 	$(DC) up -d
 	$(EXEC_PHP) composer install
-# 	$(EXEC_PHP) $(CONSOLE) doctrine:database:create --if-not-exists
-# 	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
-# 	$(EXEC_PHP) $(CONSOLE) make:migration
+	$(EXEC_PHP) $(CONSOLE) doctrine:database:create --if-not-exists
+	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
+	$(EXEC_PHP) $(CONSOLE) make:migration
 .PHONY: stop ## stop the project
 stop:
 	$(DC) down
