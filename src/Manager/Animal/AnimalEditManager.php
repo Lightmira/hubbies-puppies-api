@@ -72,15 +72,21 @@ class AnimalEditManager
     /**
      * Delete an animal
      *
-     * @param Animal $animal
+     * @param string $animalUUID
      *
      * @return Animal
      * @throws Exception
      */
-    public function delete(Animal $animal)
+    public function delete(string $animalUUID)
     {
         try {
+            /** @var Animal $animal */
+            $animal = $this->entityManager->getRepository(Animal::class)->findOneBy([
+                'uuid' => $animalUUID
+            ]);
             $animal->setDeleted(new DateTime());
+
+            $this->entityManager->flush();
 
             return $animal;
         } catch (Exception $e) {

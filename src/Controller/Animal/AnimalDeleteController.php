@@ -20,11 +20,18 @@ class AnimalDeleteController extends AbstractFOSRestController
 
     /**
      * @OA\Delete(
-     *     path="/animals/{animalId}",
+     *     path="/animals/{animalUUID}",
      *     summary="Delete an Animal",
      *     tags={"Animal"},
      *     @OA\Parameter(
-     *         ref="#/components/parameters/animalId",
+     *         name="animalUUID",
+     *         in="path",
+     *         description="uuid of an animal",
+     *         required=true,
+     *         example="bd6bc279-2a0c-40cc-ae94-cb6c1697cf64",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
      *     ),
      *     @OA\Response(
      *         response="204",
@@ -50,17 +57,16 @@ class AnimalDeleteController extends AbstractFOSRestController
      * Delete an animal
      *
      * @Rest\Delete(
-     *     path = "/api/animals/{animalId}",
+     *     path = "/api/animals/{animalUUID}",
      *     name = "delete_animal",
      * )
      *
      * @Rest\View(statusCode=204)
      */
-    public function delete(Animal $animalId)
+    public function delete(string $animalUUID)
     {
-        dd('ok');
         try {
-            $this->animalEditManager->delete($animalId);
+            $this->animalEditManager->delete($animalUUID);
 
             return;
         } catch (Exception $e) {

@@ -20,11 +20,18 @@ class AnimalViewController extends AbstractFOSRestController
 
     /**
      * @OA\Get(
-     *     path="/animals/{animalId}",
+     *     path="/animals/{animalUUID}",
      *     summary="Get a single Animal from uuid",
      *     tags={"Animal"},
      *     @OA\Parameter(
-     *         ref="#/components/parameters/animalId",
+     *         name="animalUUID",
+     *         in="path",
+     *         description="uuid of an animal",
+     *         required=true,
+     *         example="bd6bc279-2a0c-40cc-ae94-cb6c1697cf64",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
      *     ),
      *     @OA\Response(
      *         response="200",
@@ -73,16 +80,16 @@ class AnimalViewController extends AbstractFOSRestController
      * Get an animal
      *
      * @Rest\Get(
-     *     path = "/animals/{animalId}",
+     *     path = "/animals/{animalUUID}",
      *     name = "get_animal",
      * )
      *
      * @Rest\View(statusCode=200)
      */
-    public function getOne(Request $request, Animal $animalId)
+    public function getOne(Request $request, Animal $animalUUID)
     {
 //        try {
-//            $animal = $this->animalViewManager->get($animalId);
+//            $animal = $this->animalViewManager->get(animalUUID);
 //
 //            return $this->serializer->jsonResponse($project, $serializerGroups);
 //        } catch (Exception $e) {

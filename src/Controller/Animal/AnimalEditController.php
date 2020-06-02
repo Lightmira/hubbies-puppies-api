@@ -21,11 +21,18 @@ class AnimalEditController extends AbstractFOSRestController
 
     /**
      * @OA\Put(
-     *     path="/animals/{animalId}",
+     *     path="/animals/{animalUUID}",
      *     summary="Edit an Animal",
      *     tags={"Animal"},
      *     @OA\Parameter(
-     *         ref="#/components/parameters/animalId"
+     *         name="animalUUID",
+     *         in="path",
+     *         description="uuid of an animal",
+     *         required=true,
+     *         example="bd6bc279-2a0c-40cc-ae94-cb6c1697cf64",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
      *     ),
      *     @OA\RequestBody(
      *         description="Animal that will be edited",
@@ -97,7 +104,7 @@ class AnimalEditController extends AbstractFOSRestController
      * Edit animal
      *
      * @Rest\Put(
-     *     path = "/animals/{animalId}",
+     *     path = "/animals/{animalUUID}",
      *     name = "put_animal",
      * )
      *
