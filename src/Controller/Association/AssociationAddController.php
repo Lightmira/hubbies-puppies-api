@@ -5,11 +5,12 @@ namespace App\Controller\Association;
 use App\Entity\Association;
 use App\Manager\Association\AssociationAddManager;
 use Exception;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AssociationAddController extends AbstractController
+class AssociationAddController extends AbstractFOSRestController
 {
     private $associationAddManager;
 
@@ -33,27 +34,27 @@ class AssociationAddController extends AbstractController
      *                 ref="#/components/schemas/Association/properties/name"
      *             ),
      *             @OA\Property(
-     *                 property="gender",
+     *                 property="logo",
      *                 ref="#/components/schemas/Association/properties/logo"
      *             ),
      *             @OA\Property(
-     *                 property="age",
+     *                 property="description",
      *                 ref="#/components/schemas/Association/properties/description"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="phone",
      *                 ref="#/components/schemas/Association/properties/phone"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="cellphone",
      *                 ref="#/components/schemas/Association/properties/cellphone"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="email",
      *                 ref="#/components/schemas/Association/properties/email"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="address",
      *                 ref="#/components/schemas/Association/properties/address"
      *             ),
      *         ),
@@ -72,27 +73,27 @@ class AssociationAddController extends AbstractController
      *                 ref="#/components/schemas/Association/properties/name"
      *             ),
      *             @OA\Property(
-     *                 property="gender",
+     *                 property="logo",
      *                 ref="#/components/schemas/Association/properties/logo"
      *             ),
      *             @OA\Property(
-     *                 property="age",
+     *                 property="description",
      *                 ref="#/components/schemas/Association/properties/description"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="phone",
      *                 ref="#/components/schemas/Association/properties/phone"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="cellphone",
      *                 ref="#/components/schemas/Association/properties/cellphone"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="email",
      *                 ref="#/components/schemas/Association/properties/email"
      *             ),
      *             @OA\Property(
-     *                 property="description",
+     *                 property="address",
      *                 ref="#/components/schemas/Association/properties/address"
      *             ),
      *         ),
@@ -113,6 +114,10 @@ class AssociationAddController extends AbstractController
      * Add an Association
      *
      * @Route("/api/associations", name="post_association")
+     *
+     * @Rest\View(statusCode=201, serializerGroups={
+     *     "association_default",
+     * })
      */
     public function add(Request $request): Association
     {

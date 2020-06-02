@@ -32,9 +32,6 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "uuid": {
-                                        "$ref": "#/components/schemas/Animal/properties/uuid"
-                                    },
                                     "name": {
                                         "$ref": "#/components/schemas/Animal/properties/name"
                                     },
@@ -74,6 +71,94 @@
                                         },
                                         "description": {
                                             "$ref": "#/components/schemas/Animal/properties/description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/associations": {
+            "post": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Add an Association",
+                "requestBody": {
+                    "description": "Association that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/Association/properties/name"
+                                    },
+                                    "logo": {
+                                        "$ref": "#/components/schemas/Association/properties/logo"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Association/properties/description"
+                                    },
+                                    "phone": {
+                                        "$ref": "#/components/schemas/Association/properties/phone"
+                                    },
+                                    "cellphone": {
+                                        "$ref": "#/components/schemas/Association/properties/cellphone"
+                                    },
+                                    "email": {
+                                        "$ref": "#/components/schemas/Association/properties/email"
+                                    },
+                                    "address": {
+                                        "$ref": "#/components/schemas/Association/properties/address"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Association successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Association/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Association/properties/name"
+                                        },
+                                        "logo": {
+                                            "$ref": "#/components/schemas/Association/properties/logo"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Association/properties/description"
+                                        },
+                                        "phone": {
+                                            "$ref": "#/components/schemas/Association/properties/phone"
+                                        },
+                                        "cellphone": {
+                                            "$ref": "#/components/schemas/Association/properties/cellphone"
+                                        },
+                                        "email": {
+                                            "$ref": "#/components/schemas/Association/properties/email"
+                                        },
+                                        "address": {
+                                            "$ref": "#/components/schemas/Association/properties/address"
                                         }
                                     },
                                     "type": "object"
