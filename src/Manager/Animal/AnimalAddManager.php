@@ -5,6 +5,8 @@ namespace App\Manager\Animal;
 
 use App\Entity\Animal;
 use App\Entity\Association;
+use App\Entity\Breed;
+use App\Entity\Species;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
@@ -22,7 +24,9 @@ class AnimalAddManager
         string $gender,
         int $age,
         string $description,
-        int $associationUUID
+        string $associationUUID,
+        string $breedUUID,
+        string $speciesUUID
     ): Animal
     {
         try {
@@ -34,12 +38,24 @@ class AnimalAddManager
                 'uuid' => $associationUUID
             ]);
 
+            /** @var Breed $breed */
+            $breed = $this->entityManager->getRepository(Breed::class)->findOneBy([
+                'uuid' => $breedUUID
+            ]);
+
+            /** @var Species $species */
+            $species = $this->entityManager->getRepository(Species::class)->findOneBy([
+                'uuid' => $speciesUUID
+            ]);
+
             $animal
                 ->setName($name)
                 ->setGender($gender)
                 ->setAge($age)
                 ->setDescription($description)
                 ->setAssociation($association)
+                ->setBreed($breed)
+                ->setSpecies($species)
             ;
 
             $this->entityManager->flush();

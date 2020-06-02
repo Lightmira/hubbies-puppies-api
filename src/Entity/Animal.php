@@ -48,6 +48,7 @@ class Animal
      * @ORM\Column(name="uuid", type="uuid", unique=true)
      * @Serializer\SerializedName("id")
      * @Serializer\Type("uuid")
+     * @Serializer\Groups({"animal_default"})
      */
     private $uuid;
 
@@ -60,6 +61,7 @@ class Animal
      * )
      *
      * @ORM\Column(name="dateCreation", type="datetime")
+     * @Serializer\Groups({"animal_default"})
      */
     private $dateCreation;
 
@@ -97,7 +99,7 @@ class Animal
      *
      * @ORM\Column(name="name", type="string", length=255)
      * @Serializer\SerializedName("name")
-     *
+     * @Serializer\Groups({"animal_default"})
      */
     private $name;
 
@@ -110,13 +112,14 @@ class Animal
      *         type="string"
      *     ),
      *     example={
-     *         "m",
-     *         "f"
+     *         "male",
+     *         "female"
      *     }
      * )
      *
      * @ORM\Column(name="gender", type="string")
      * @Serializer\SerializedName("gender")
+     * @Serializer\Groups({"animal_default"})
      */
     private $gender;
 
@@ -130,6 +133,7 @@ class Animal
      *
      * @ORM\Column(name="age", type="integer")
      * @Serializer\SerializedName("age")
+     * @Serializer\Groups({"animal_default"})
      */
     private $age;
 
@@ -143,6 +147,7 @@ class Animal
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Serializer\SerializedName("description")
+     * @Serializer\Groups({"animal_default"})
      */
     private $description;
 

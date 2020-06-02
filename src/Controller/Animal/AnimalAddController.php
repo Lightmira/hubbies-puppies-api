@@ -6,12 +6,13 @@ namespace App\Controller\Animal;
 use App\Entity\Animal;
 use App\Manager\Animal\AnimalAddManager;
 use Exception;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use OpenApi\Annotations as OA;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AnimalAddController extends AbstractController
+class AnimalAddController extends AbstractFOSRestController
 {
     private $animalAddManager;
 
@@ -91,15 +92,21 @@ class AnimalAddController extends AbstractController
      * Add an Animal
      *
      * @Route("/api/animals", name="post_animal")
+     *
+     * @Rest\View(statusCode=201, serializerGroups={
+     *     "animal_default",
+     * })
      */
     public function add(Request $request): Animal
     {
         try {
-            $name        = $request->get('name');
-            $gender      = $request->get('gender');
-            $age         = $request->get('age');
-            $description = $request->get('description');
+            $name          = $request->get('name');
+            $gender        = $request->get('gender');
+            $age           = $request->get('age');
+            $description   = $request->get('description');
             $associationId = $request->get('association_id');
+            $breedId       = $request->get('breed_id');
+            $speciesId     = $request->get('species_id');
 
             /** @var Animal $animal */
             $animal = $this->animalAddManager->add(
@@ -107,7 +114,9 @@ class AnimalAddController extends AbstractController
                 $gender,
                 $age,
                 $description,
-                $associationId
+                $associationId,
+                $breedId,
+                $speciesId
             );
 
             return $animal;

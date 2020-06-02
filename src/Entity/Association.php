@@ -63,6 +63,7 @@ class Association
      * )
      *
      * @ORM\Column(name="dateCreation", type="datetime")
+     * @Serializer\Groups({"association_default"})
      */
     private $dateCreation;
 
