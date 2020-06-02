@@ -18,6 +18,81 @@
             "description": "HUBBIES PUPPIES PREPROD API"
         }
     ],
+    "paths": {
+        "/api/animals": {
+            "post": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Add an Animal",
+                "requestBody": {
+                    "description": "Animal that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "uuid": {
+                                        "$ref": "#/components/schemas/Animal/properties/uuid"
+                                    },
+                                    "name": {
+                                        "$ref": "#/components/schemas/Animal/properties/name"
+                                    },
+                                    "gender": {
+                                        "$ref": "#/components/schemas/Animal/properties/gender"
+                                    },
+                                    "age": {
+                                        "$ref": "#/components/schemas/Animal/properties/age"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Animal/properties/description"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Animal successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Animal/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Animal/properties/name"
+                                        },
+                                        "gender": {
+                                            "$ref": "#/components/schemas/Animal/properties/gender"
+                                        },
+                                        "age": {
+                                            "$ref": "#/components/schemas/Animal/properties/age"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Animal/properties/description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
     "components": {
         "schemas": {
             "Animal": {
@@ -58,8 +133,8 @@
                             "type": "string"
                         },
                         "example": [
-                            "Male",
-                            "Female"
+                            "m",
+                            "f"
                         ],
                         "nullable": false
                     },
@@ -210,6 +285,108 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "responses": {
+            "animal_404": {
+                "description": "Animal not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "animalNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "association_404": {
+                "description": "Association not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "associationNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "breed_404": {
+                "description": "Breed not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "breedNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "error_500": {
+                "description": "Error: Internal Server Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "500"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "systemError"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "species_404": {
+                "description": "Species not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "speciesNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
             }
         },
         "securitySchemes": {

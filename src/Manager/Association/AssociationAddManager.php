@@ -1,14 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Manager\Animal;
+namespace App\Manager\Association;
 
-use App\Entity\Animal;
 use App\Entity\Association;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
-class AnimalAddManager
+class AssociationAddManager
 {
     private $entityManager;
 
@@ -19,32 +18,31 @@ class AnimalAddManager
 
     public function add(
         string $name,
-        string $gender,
-        int $age,
+        string $logo,
         string $description,
-        int $associationUUID
-    ): Animal
+        string $phone,
+        string $cellphone,
+        string $email,
+        string $address
+    ): Association
     {
         try {
-            $animal = new Animal();
-            $this->entityManager->persist($animal);
+            $association = new Association();
+            $this->entityManager->persist($association);
 
-            /** @var Association $association */
-            $association = $this->entityManager->getRepository(Association::class)->findOneBy([
-                'uuid' => $associationUUID
-            ]);
-
-            $animal
+            $association
                 ->setName($name)
-                ->setGender($gender)
-                ->setAge($age)
+                ->setLogo($logo)
                 ->setDescription($description)
-                ->setAssociation($association)
+                ->setPhone($phone)
+                ->setCellphone($cellphone)
+                ->setEmail($email)
+                ->setAddress($address)
             ;
 
             $this->entityManager->flush();
 
-            return $animal;
+            return $association;
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());

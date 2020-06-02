@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Association;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SpeciesViewController extends AbstractController
+class AssociationDeleteController extends AbstractController
 {
     /**
-     * @Route("/species/view", name="species_view")
+     * @Route("/association/delete", name="association_delete")
      */
     public function index()
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/SpeciesViewController.php',
+            'path' => 'src/Controller/AssociationDeleteController.php',
         ]);
     }
 }

@@ -110,12 +110,12 @@ class Animal
      *         type="string"
      *     ),
      *     example={
-     *         "Male",
-     *         "Female"
+     *         "m",
+     *         "f"
      *     }
      * )
      *
-     * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'femele')")
+     * @ORM\Column(name="gender", type="string")
      * @Serializer\SerializedName("gender")
      */
     private $gender;

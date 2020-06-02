@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Breed;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SpeciesEditController extends AbstractController
+class BreedDeleteController extends AbstractController
 {
     /**
-     * @Route("/species/edit", name="species_edit")
+     * @Route("/breed/delete", name="breed_delete")
      */
     public function index()
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/SpeciesEditController.php',
+            'path' => 'src/Controller/BreedDeleteController.php',
         ]);
     }
 }

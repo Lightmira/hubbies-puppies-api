@@ -1,0 +1,144 @@
+<?php
+
+namespace App\Controller\Association;
+
+use App\Entity\Association;
+use App\Manager\Association\AssociationAddManager;
+use Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+class AssociationAddController extends AbstractController
+{
+    private $associationAddManager;
+
+    public function __construct(AssociationAddManager $associationAddManager)
+    {
+        $this->associationAddManager = $associationAddManager;
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/associations",
+     *     summary="Add an Association",
+     *     tags={"Association"},
+     *     @OA\RequestBody(
+     *         description="Association that will be added",
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="name",
+     *                 ref="#/components/schemas/Association/properties/name"
+     *             ),
+     *             @OA\Property(
+     *                 property="gender",
+     *                 ref="#/components/schemas/Association/properties/logo"
+     *             ),
+     *             @OA\Property(
+     *                 property="age",
+     *                 ref="#/components/schemas/Association/properties/description"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/phone"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/cellphone"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/email"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/address"
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Association successfully added",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="uuid",
+     *                 ref="#/components/schemas/Association/properties/uuid"
+     *             ),
+     *             @OA\Property(
+     *                 property="name",
+     *                 ref="#/components/schemas/Association/properties/name"
+     *             ),
+     *             @OA\Property(
+     *                 property="gender",
+     *                 ref="#/components/schemas/Association/properties/logo"
+     *             ),
+     *             @OA\Property(
+     *                 property="age",
+     *                 ref="#/components/schemas/Association/properties/description"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/phone"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/cellphone"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/email"
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Association/properties/address"
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         ref="#/components/responses/error_500",
+     *     ),
+     *     security={
+     *         {
+     *             "bearer": {}
+     *         }
+     *     }
+     * )
+     */
+
+    /**
+     * Add an Association
+     *
+     * @Route("/api/associations", name="post_association")
+     */
+    public function add(Request $request): Association
+    {
+        try {
+            $name        = $request->get('name');
+            $logo        = $request->get('logo');
+            $description = $request->get('description');
+            $phone       = $request->get('phone');
+            $cellphone   = $request->get('cellphone');
+            $email       = $request->get('email');
+            $address     = $request->get('address');
+
+            $association = $this->associationAddManager->add(
+                $name,
+                $logo,
+                $description,
+                $phone,
+                $cellphone,
+                $email,
+                $address
+            );
+
+            return $association;
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+}
