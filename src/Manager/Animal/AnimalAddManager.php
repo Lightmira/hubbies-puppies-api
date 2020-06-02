@@ -19,10 +19,24 @@ class AnimalAddManager
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Create a new animal
+     *
+     * @param string $name
+     * @param string $gender
+     * @param int    $age
+     * @param string $description
+     * @param string $associationUUID
+     * @param string $breedUUID
+     * @param string $speciesUUID
+     *
+     * @return Animal
+     * @throws Exception
+     */
     public function add(
         string $name,
         string $gender,
-        int $age,
+        int    $age,
         string $description,
         string $associationUUID,
         string $breedUUID,

@@ -10,7 +10,6 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
 class AnimalAddController extends AbstractFOSRestController
 {
@@ -33,19 +32,19 @@ class AnimalAddController extends AbstractFOSRestController
      *             type="object",
      *             @OA\Property(
      *                 property="name",
-     *                 ref="#/components/schemas/Animal/properties/name"
+     *                 ref="#/components/schemas/Animal/properties/name",
      *             ),
      *             @OA\Property(
      *                 property="gender",
-     *                 ref="#/components/schemas/Animal/properties/gender"
+     *                 ref="#/components/schemas/Animal/properties/gender",
      *             ),
      *             @OA\Property(
      *                 property="age",
-     *                 ref="#/components/schemas/Animal/properties/age"
+     *                 ref="#/components/schemas/Animal/properties/age",
      *             ),
      *             @OA\Property(
      *                 property="description",
-     *                 ref="#/components/schemas/Animal/properties/description"
+     *                 ref="#/components/schemas/Animal/properties/description",
      *             )
      *         ),
      *     ),
@@ -56,23 +55,23 @@ class AnimalAddController extends AbstractFOSRestController
      *             type="object",
      *             @OA\Property(
      *                 property="uuid",
-     *                 ref="#/components/schemas/Animal/properties/uuid"
+     *                 ref="#/components/schemas/Animal/properties/uuid",
      *             ),
      *             @OA\Property(
      *                 property="name",
-     *                 ref="#/components/schemas/Animal/properties/name"
+     *                 ref="#/components/schemas/Animal/properties/name",
      *             ),
      *             @OA\Property(
      *                 property="gender",
-     *                 ref="#/components/schemas/Animal/properties/gender"
+     *                 ref="#/components/schemas/Animal/properties/gender",
      *             ),
      *             @OA\Property(
      *                 property="age",
-     *                 ref="#/components/schemas/Animal/properties/age"
+     *                 ref="#/components/schemas/Animal/properties/age",
      *             ),
      *             @OA\Property(
      *                 property="description",
-     *                 ref="#/components/schemas/Animal/properties/description"
+     *                 ref="#/components/schemas/Animal/properties/description",
      *             )
      *         ),
      *     ),
@@ -89,13 +88,14 @@ class AnimalAddController extends AbstractFOSRestController
      */
 
     /**
-     * Add an Animal
+     * Add an animal
      *
-     * @Route("/api/animals", name="post_animal")
+     * @Rest\Post(
+     *     path = "/api/animals",
+     *     name = "post_animal",
+     * )
      *
-     * @Rest\View(statusCode=201, serializerGroups={
-     *     "animal_default",
-     * })
+     * @Rest\View(statusCode=201, serializerGroups={ "animal_default" })
      */
     public function add(Request $request): Animal
     {

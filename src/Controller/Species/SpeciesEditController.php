@@ -2,6 +2,7 @@
 
 namespace App\Controller\Species;
 
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 

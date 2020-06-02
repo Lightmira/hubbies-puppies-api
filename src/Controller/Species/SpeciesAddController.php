@@ -7,6 +7,7 @@ use App\Manager\Species\SpeciesAddManager;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,7 +22,7 @@ class SpeciesAddController extends AbstractFOSRestController
 
     /**
      * @OA\Post(
-     *     path="/api/breeds",
+     *     path="/api/species",
      *     summary="Add a Species",
      *     tags={"Species"},
      *     @OA\RequestBody(

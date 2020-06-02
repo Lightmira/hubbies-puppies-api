@@ -12,6 +12,6 @@ use OpenApi\Annotations as OA;
  *         @OA\Property(property="code", example="404"),
  *         @OA\Property(property="message", example="speciesNotFound"),
  *     )
- * ),
+ * )
  *
  */

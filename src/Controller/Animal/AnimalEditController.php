@@ -2,19 +2,134 @@
 
 namespace App\Controller\Animal;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Animal;
+use App\Manager\Animal\AnimalEditManager;
+use Exception;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\Request;
 
-class AnimalEditController extends AbstractController
+class AnimalEditController extends AbstractFOSRestController
 {
-    /**
-     * @Route("/animal/edit", name="animal_edit")
-     */
-    public function index()
+    private $animalEditManager;
+
+    public function __construct(AnimalEditManager $animalEditManager)
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/AnimalEditController.php',
-        ]);
+        $this->animalEditManager = $animalEditManager;
+    }
+
+    /**
+     * @OA\Put(
+     *     path="/animals/{animalId}",
+     *     summary="Edit an Animal",
+     *     tags={"Animal"},
+     *     @OA\Parameter(
+     *         ref="#/components/parameters/animalId"
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Animal that will be edited",
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="name",
+     *                 ref="#/components/schemas/Animal/properties/name",
+     *             ),
+     *             @OA\Property(
+     *                 property="gender",
+     *                 ref="#/components/schemas/Animal/properties/gender",
+     *             ),
+     *             @OA\Property(
+     *                 property="age",
+     *                 ref="#/components/schemas/Animal/properties/age",
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Animal/properties/description",
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Animal successfully edited",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="id",
+     *                 ref="#/components/schemas/Animal/properties/uuid",
+     *             ),
+     *             @OA\Property(
+     *                 property="name",
+     *                 ref="#/components/schemas/Animal/properties/name",
+     *             ),
+     *             @OA\Property(
+     *                 property="gender",
+     *                 ref="#/components/schemas/Animal/properties/gender",
+     *             ),
+     *             @OA\Property(
+     *                 property="age",
+     *                 ref="#/components/schemas/Animal/properties/age",
+     *             ),
+     *             @OA\Property(
+     *                 property="description",
+     *                 ref="#/components/schemas/Animal/properties/description",
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         ref="#/components/responses/animal_404",
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         ref="#/components/responses/error_500",
+     *     ),
+     *     security={
+     *         {
+     *             "bearer": {}
+     *         }
+     *     },
+     * )
+     */
+
+    /**
+     * Edit animal
+     *
+     * @Rest\Put(
+     *     path = "/animals/{animalId}",
+     *     name = "put_animal",
+     * )
+     *
+     * @Rest\View(statusCode=200, serializerGroups={ "animal_default" })
+     */
+    public function edit(Request $request, Animal $projectId)
+    {
+        dd('ok');
+        try {
+            $name          = $request->get('name');
+            $gender        = $request->get('gender');
+            $age           = $request->get('age');
+            $description   = $request->get('description');
+            $associationId = $request->get('association_id');
+            $breedId       = $request->get('breed_id');
+            $speciesId     = $request->get('species_id');
+
+            /** @var Animal $animal */
+            $animal = $this->animalEditManager->edit(
+                $projectId,
+                $name,
+                $gender,
+                $age,
+                $description,
+                $associationId,
+                $breedId,
+                $speciesId
+            );
+
+            return $animal;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
     }
 }

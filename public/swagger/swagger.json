@@ -89,6 +89,162 @@
                 ]
             }
         },
+        "/animals/{animalId}": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Get a single Animal from uuid",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/animalId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Animal successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Animal/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Animal/properties/name"
+                                        },
+                                        "gender": {
+                                            "$ref": "#/components/schemas/Animal/properties/gender"
+                                        },
+                                        "age": {
+                                            "$ref": "#/components/schemas/Animal/properties/age"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Animal/properties/description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Edit an Animal",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/animalId"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Animal that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/Animal/properties/name"
+                                    },
+                                    "gender": {
+                                        "$ref": "#/components/schemas/Animal/properties/gender"
+                                    },
+                                    "age": {
+                                        "$ref": "#/components/schemas/Animal/properties/age"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Animal/properties/description"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Animal successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Animal/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Animal/properties/name"
+                                        },
+                                        "gender": {
+                                            "$ref": "#/components/schemas/Animal/properties/gender"
+                                        },
+                                        "age": {
+                                            "$ref": "#/components/schemas/Animal/properties/age"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Animal/properties/description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Delete an Animal",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/animalId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/associations": {
             "post": {
                 "tags": [
@@ -176,6 +332,110 @@
                     }
                 ]
             }
+        },
+        "/api/breeds": {
+            "post": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Add a Breed",
+                "requestBody": {
+                    "description": "Breed that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Breed/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Breed successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Breed/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Breed/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/species": {
+            "post": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Add a Species",
+                "requestBody": {
+                    "description": "Species that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Species/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Species successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Species/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Species/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -218,8 +478,8 @@
                             "type": "string"
                         },
                         "example": [
-                            "m",
-                            "f"
+                            "male",
+                            "female"
                         ],
                         "nullable": false
                     },
@@ -472,6 +732,48 @@
                         }
                     }
                 }
+            }
+        },
+        "parameters": {
+            "animalId": {
+                "name": "animalId",
+                "in": "path",
+                "description": "uuid of an animal",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                },
+                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+            },
+            "associationId": {
+                "name": "associationId",
+                "in": "path",
+                "description": "uuid of an association",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                },
+                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+            },
+            "breedId": {
+                "name": "breedId",
+                "in": "path",
+                "description": "uuid of a breed",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                },
+                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+            },
+            "speciesId": {
+                "name": "speciesId",
+                "in": "path",
+                "description": "uuid of a species",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                },
+                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
             }
         },
         "securitySchemes": {
