@@ -95,7 +95,7 @@ class AnimalAddController extends AbstractFOSRestController
      *     name = "post_animal",
      * )
      *
-     * @Rest\View(statusCode=201, serializerGroups={ "animal_default" })
+     * @Rest\View(statusCode=201, serializerGroups={"animal_default"})
      */
     public function add(Request $request): Animal
     {

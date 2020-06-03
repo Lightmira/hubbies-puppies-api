@@ -108,7 +108,7 @@ class AnimalEditController extends AbstractFOSRestController
      *     name = "put_animal",
      * )
      *
-     * @Rest\View(statusCode=200, serializerGroups={ "animal_default" })
+     * @Rest\View(statusCode=200, serializerGroups={"animal_default"})
      */
     public function edit(Request $request, string $animalUUID): Animal
     {

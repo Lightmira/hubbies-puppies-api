@@ -89,7 +89,7 @@
                 ]
             }
         },
-        "/animals/{animalId}": {
+        "/api/animals/{animalUUID}": {
             "get": {
                 "tags": [
                     "Animal"
@@ -97,7 +97,14 @@
                 "summary": "Get a single Animal from uuid",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/animalId"
+                        "name": "animalUUID",
+                        "in": "path",
+                        "description": "uuid of an animal",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
                     }
                 ],
                 "responses": {
@@ -148,7 +155,14 @@
                 "summary": "Edit an Animal",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/animalId"
+                        "name": "animalUUID",
+                        "in": "path",
+                        "description": "uuid of an animal",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
                     }
                 ],
                 "requestBody": {
@@ -224,7 +238,14 @@
                 "summary": "Delete an Animal",
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/animalId"
+                        "name": "animalUUID",
+                        "in": "path",
+                        "description": "uuid of an animal",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
                     }
                 ],
                 "responses": {
@@ -321,6 +342,212 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/association/{associationUUID}": {
+            "delete": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Delete an Association",
+                "parameters": [
+                    {
+                        "name": "associationUUID",
+                        "in": "path",
+                        "description": "uuid of an association",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/associations/{associationUUID}": {
+            "get": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Get a single Association from uuid",
+                "parameters": [
+                    {
+                        "name": "associationUUID",
+                        "in": "path",
+                        "description": "uuid of an association",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Association successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Association/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Association/properties/name"
+                                        },
+                                        "logo": {
+                                            "$ref": "#/components/schemas/Association/properties/logo"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Association/properties/description"
+                                        },
+                                        "phone": {
+                                            "$ref": "#/components/schemas/Association/properties/phone"
+                                        },
+                                        "cellphone": {
+                                            "$ref": "#/components/schemas/Association/properties/cellphone"
+                                        },
+                                        "email": {
+                                            "$ref": "#/components/schemas/Association/properties/email"
+                                        },
+                                        "address": {
+                                            "$ref": "#/components/schemas/Association/properties/address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Edit an Association",
+                "parameters": [
+                    {
+                        "name": "associationUUID",
+                        "in": "path",
+                        "description": "uuid of an association",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Association that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/Association/properties/name"
+                                    },
+                                    "logo": {
+                                        "$ref": "#/components/schemas/Association/properties/logo"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Association/properties/description"
+                                    },
+                                    "phone": {
+                                        "$ref": "#/components/schemas/Association/properties/phone"
+                                    },
+                                    "cellphone": {
+                                        "$ref": "#/components/schemas/Association/properties/cellphone"
+                                    },
+                                    "email": {
+                                        "$ref": "#/components/schemas/Association/properties/email"
+                                    },
+                                    "address": {
+                                        "$ref": "#/components/schemas/Association/properties/address"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Association successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Association/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Association/properties/name"
+                                        },
+                                        "logo": {
+                                            "$ref": "#/components/schemas/Association/properties/logo"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Association/properties/description"
+                                        },
+                                        "phone": {
+                                            "$ref": "#/components/schemas/Association/properties/phone"
+                                        },
+                                        "cellphone": {
+                                            "$ref": "#/components/schemas/Association/properties/cellphone"
+                                        },
+                                        "email": {
+                                            "$ref": "#/components/schemas/Association/properties/email"
+                                        },
+                                        "address": {
+                                            "$ref": "#/components/schemas/Association/properties/address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"
@@ -732,48 +959,6 @@
                         }
                     }
                 }
-            }
-        },
-        "parameters": {
-            "animalId": {
-                "name": "animalId",
-                "in": "path",
-                "description": "uuid of an animal",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
-            },
-            "associationId": {
-                "name": "associationId",
-                "in": "path",
-                "description": "uuid of an association",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
-            },
-            "breedId": {
-                "name": "breedId",
-                "in": "path",
-                "description": "uuid of a breed",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
-            },
-            "speciesId": {
-                "name": "speciesId",
-                "in": "path",
-                "description": "uuid of a species",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                },
-                "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
             }
         },
         "securitySchemes": {
