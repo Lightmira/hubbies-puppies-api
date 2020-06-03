@@ -79,7 +79,6 @@ class BreedAddController extends AbstractFOSRestController
             $breed = $this->breedAddManager->add($label);
 
             return $breed;
-
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

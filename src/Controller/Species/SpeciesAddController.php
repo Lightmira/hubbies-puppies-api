@@ -81,7 +81,6 @@ class SpeciesAddController extends AbstractFOSRestController
             $species = $this->speciesAddManager->add($label);
 
             return $species;
-
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

@@ -43,20 +43,8 @@ class BreedViewController extends AbstractFOSRestController
      *                 ref="#/components/schemas/Breed/properties/uuid",
      *             ),
      *             @OA\Property(
-     *                 property="name",
-     *                 ref="#/components/schemas/Breed/properties/name",
-     *             ),
-     *             @OA\Property(
-     *                 property="gender",
-     *                 ref="#/components/schemas/Breed/properties/gender",
-     *             ),
-     *             @OA\Property(
-     *                 property="age",
-     *                 ref="#/components/schemas/Breed/properties/age",
-     *             ),
-     *             @OA\Property(
-     *                 property="description",
-     *                 ref="#/components/schemas/Breed/properties/description",
+     *                 property="label",
+     *                 ref="#/components/schemas/Breed/properties/label",
      *             ),
      *         ),
      *     ),

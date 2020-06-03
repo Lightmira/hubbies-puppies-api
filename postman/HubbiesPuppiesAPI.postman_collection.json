@@ -378,6 +378,85 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "View Species",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/species/b57ce3a7-8c35-4da0-8c12-236e0bd949de",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"species",
+								"b57ce3a7-8c35-4da0-8c12-236e0bd949de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Species",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"Chat\"\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/species/b57ce3a7-8c35-4da0-8c12-236e0bd949de",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"species",
+								"b57ce3a7-8c35-4da0-8c12-236e0bd949de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Species",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/species/b57ce3a7-8c35-4da0-8c12-236e0bd949de",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"species",
+								"b57ce3a7-8c35-4da0-8c12-236e0bd949de"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
