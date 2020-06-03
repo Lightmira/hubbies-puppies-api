@@ -50,6 +50,7 @@ class Association
      * @ORM\Column(name="uuid", type="uuid", unique=true)
      * @Serializer\SerializedName("id")
      * @Serializer\Type("uuid")
+     * @Serializer\Groups({"association_default"})
      */
     private $uuid;
 
@@ -62,6 +63,7 @@ class Association
      * )
      *
      * @ORM\Column(name="dateCreation", type="datetime")
+     * @Serializer\Groups({"association_default"})
      */
     private $dateCreation;
 
@@ -99,7 +101,7 @@ class Association
      *
      * @ORM\Column(name="name", type="string", length=255)
      * @Serializer\SerializedName("name")
-     *
+     * @Serializer\Groups({"association_default"})
      */
     private $name;
 
@@ -113,6 +115,7 @@ class Association
      *
      * @ORM\Column(name="logo", type="string", length=100, nullable=true)
      * @Serializer\SerializedName("logo")
+     * @Serializer\Groups({"association_default"})
      */
     private $logo;
 
@@ -126,6 +129,7 @@ class Association
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Serializer\SerializedName("description")
+     * @Serializer\Groups({"association_default"})
      */
     private $description;
 
@@ -139,6 +143,7 @@ class Association
      *
      * @ORM\Column(name="phone", type="string", length=20)
      * @Serializer\SerializedName("phone")
+     * @Serializer\Groups({"association_default"})
      */
     private $phone;
 
@@ -152,6 +157,7 @@ class Association
      *
      * @ORM\Column(name="cellphone", type="string", length=20, nullable=true)
      * @Serializer\SerializedName("cellphone")
+     * @Serializer\Groups({"association_default"})
      */
     private $cellphone;
 
@@ -165,6 +171,7 @@ class Association
      *
      * @ORM\Column(name="email", type="string", length=100)
      * @Serializer\SerializedName("email")
+     * @Serializer\Groups({"association_default"})
      */
     private $email;
 
@@ -178,6 +185,7 @@ class Association
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      * @Serializer\SerializedName("address")
+     * @Serializer\Groups({"association_default"})
      */
     private $address;
 

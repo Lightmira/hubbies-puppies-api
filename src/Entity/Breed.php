@@ -50,6 +50,7 @@ class Breed
      * @ORM\Column(name="uuid", type="uuid", unique=true)
      * @Serializer\SerializedName("id")
      * @Serializer\Type("uuid")
+     * @Serializer\Groups({"breed_default"})
      */
     private $uuid;
 
@@ -62,6 +63,7 @@ class Breed
      * )
      *
      * @ORM\Column(name="dateCreation", type="datetime")
+     * @Serializer\Groups({"breed_default"})
      */
     private $dateCreation;
 
@@ -99,6 +101,7 @@ class Breed
      *
      * @ORM\Column(name="label", type="string", length=100)
      * @Serializer\SerializedName("label")
+     * @Serializer\Groups({"breed_default"})
      */
     private $label;
 
