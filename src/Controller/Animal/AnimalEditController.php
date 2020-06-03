@@ -21,7 +21,7 @@ class AnimalEditController extends AbstractFOSRestController
 
     /**
      * @OA\Put(
-     *     path="/animals/{animalUUID}",
+     *     path="/api/animals/{animalUUID}",
      *     summary="Edit an Animal",
      *     tags={"Animal"},
      *     @OA\Parameter(
@@ -104,34 +104,33 @@ class AnimalEditController extends AbstractFOSRestController
      * Edit animal
      *
      * @Rest\Put(
-     *     path = "/animals/{animalUUID}",
+     *     path = "/api/animals/{animalUUID}",
      *     name = "put_animal",
      * )
      *
      * @Rest\View(statusCode=200, serializerGroups={ "animal_default" })
      */
-    public function edit(Request $request, Animal $projectId)
+    public function edit(Request $request, string $animalUUID): Animal
     {
-        dd('ok');
         try {
-            $name          = $request->get('name');
-            $gender        = $request->get('gender');
-            $age           = $request->get('age');
-            $description   = $request->get('description');
-            $associationId = $request->get('association_id');
-            $breedId       = $request->get('breed_id');
-            $speciesId     = $request->get('species_id');
+            $name            = $request->get('name');
+            $gender          = $request->get('gender');
+            $age             = $request->get('age');
+            $description     = $request->get('description');
+            $associationUUID = $request->get('association_id');
+            $breedUUID       = $request->get('breed_id');
+            $speciesUUID     = $request->get('species_id');
 
             /** @var Animal $animal */
             $animal = $this->animalEditManager->edit(
-                $projectId,
+                $animalUUID,
                 $name,
                 $gender,
                 $age,
                 $description,
-                $associationId,
-                $breedId,
-                $speciesId
+                $associationUUID,
+                $breedUUID,
+                $speciesUUID
             );
 
             return $animal;

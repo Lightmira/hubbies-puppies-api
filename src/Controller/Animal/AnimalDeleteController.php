@@ -2,7 +2,6 @@
 
 namespace App\Controller\Animal;
 
-use App\Entity\Animal;
 use App\Manager\Animal\AnimalEditManager;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -20,7 +19,7 @@ class AnimalDeleteController extends AbstractFOSRestController
 
     /**
      * @OA\Delete(
-     *     path="/animals/{animalUUID}",
+     *     path="/api/animals/{animalUUID}",
      *     summary="Delete an Animal",
      *     tags={"Animal"},
      *     @OA\Parameter(
@@ -54,7 +53,7 @@ class AnimalDeleteController extends AbstractFOSRestController
      */
 
     /**
-     * Delete an animal
+     * Delete an animal (soft delete)
      *
      * @Rest\Delete(
      *     path = "/api/animals/{animalUUID}",
@@ -63,7 +62,7 @@ class AnimalDeleteController extends AbstractFOSRestController
      *
      * @Rest\View(statusCode=204)
      */
-    public function delete(string $animalUUID)
+    public function delete(string $animalUUID): void
     {
         try {
             $this->animalEditManager->delete($animalUUID);

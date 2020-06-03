@@ -23,32 +23,48 @@ class AnimalEditManager
     /**
      * Edit an animal
      *
-     * @param Animal      $animalId
-     * @param string      $name
-     * @param string      $gender
-     * @param int         $age
-     * @param string      $description
-     * @param Association $association
-     * @param Breed       $breed
-     * @param Species     $species
+     * @param string $animalUUID
+     * @param string $name
+     * @param string $gender
+     * @param int    $age
+     * @param string $description
+     * @param string $associationUUID
+     * @param string $breedUUID
+     * @param string $speciesUUID
      *
      * @return Animal
      * @throws Exception
      */
     public function edit(
-        Animal $animalId,
+        string $animalUUID,
         string $name,
         string $gender,
         int $age,
         string $description,
-        Association $association,
-        Breed $breed,
-        Species $species
-    ) {
+        string $associationUUID,
+        string $breedUUID,
+        string $speciesUUID
+    ): Animal
+    {
         try {
             /** @var Animal $animal */
             $animal = $this->entityManager->getRepository(Animal::class)->findOneBy([
-                'uuid' => $animalId
+                'uuid' => $animalUUID
+            ]);
+
+            /** @var Association $association */
+            $association = $this->entityManager->getRepository(Association::class)->findOneBy([
+                'uuid' => $associationUUID
+            ]);
+
+            /** @var Breed $breed */
+            $breed = $this->entityManager->getRepository(Breed::class)->findOneBy([
+                'uuid' => $breedUUID
+            ]);
+
+            /** @var Species $species */
+            $species = $this->entityManager->getRepository(Species::class)->findOneBy([
+                'uuid' => $speciesUUID
             ]);
 
             $animal
@@ -77,7 +93,7 @@ class AnimalEditManager
      * @return Animal
      * @throws Exception
      */
-    public function delete(string $animalUUID)
+    public function delete(string $animalUUID): Animal
     {
         try {
             /** @var Animal $animal */

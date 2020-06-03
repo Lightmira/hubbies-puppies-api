@@ -19,16 +19,17 @@ class AnimalViewManager
     /**
      * Get one animal data
      *
-     * @param Animal $animalId
+     * @param string $animalUUID
      *
-     * @return object|null
+     * @return Animal
      * @throws Exception
      */
-    public function get(Animal $animalId)
+    public function get(string $animalUUID): Animal
     {
         try {
+            /** @var Animal $animal */
             $animal = $this->entityManager->getRepository(Animal::class)->findOneBy([
-                'uuid' => $animalId
+                'uuid' => $animalUUID
             ]);
 
             return $animal;

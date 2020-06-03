@@ -100,13 +100,13 @@ class AnimalAddController extends AbstractFOSRestController
     public function add(Request $request): Animal
     {
         try {
-            $name          = $request->get('name');
-            $gender        = $request->get('gender');
-            $age           = $request->get('age');
-            $description   = $request->get('description');
-            $associationId = $request->get('association_id');
-            $breedId       = $request->get('breed_id');
-            $speciesId     = $request->get('species_id');
+            $name            = $request->get('name');
+            $gender          = $request->get('gender');
+            $age             = $request->get('age');
+            $description     = $request->get('description');
+            $associationUUID = $request->get('association_id');
+            $breedUUID       = $request->get('breed_id');
+            $speciesUUID     = $request->get('species_id');
 
             /** @var Animal $animal */
             $animal = $this->animalAddManager->add(
@@ -114,9 +114,9 @@ class AnimalAddController extends AbstractFOSRestController
                 $gender,
                 $age,
                 $description,
-                $associationId,
-                $breedId,
-                $speciesId
+                $associationUUID,
+                $breedUUID,
+                $speciesUUID
             );
 
             return $animal;
