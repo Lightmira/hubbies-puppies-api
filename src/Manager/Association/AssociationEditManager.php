@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace App\Manager\Association;
 
 use App\Entity\Association;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
-class AssociationAddManager
+class AssociationEditManager
 {
     private $entityManager;
 
@@ -17,6 +18,9 @@ class AssociationAddManager
     }
 
     /**
+     * Edit an association
+     *
+     * @param string $associationUUID
      * @param string $name
      * @param string $logo
      * @param string $description
@@ -28,7 +32,8 @@ class AssociationAddManager
      * @return Association
      * @throws Exception
      */
-    public function add(
+    public function edit(
+        string $associationUUID,
         string $name,
         string $logo,
         string $description,
@@ -39,8 +44,10 @@ class AssociationAddManager
     ): Association
     {
         try {
-            $association = new Association();
-            $this->entityManager->persist($association);
+            /** @var Association $association */
+            $association = $this->entityManager->getRepository(Association::class)->findOneBy([
+                'uuid' => $associationUUID
+            ]);
 
             $association
                 ->setName($name)
@@ -50,6 +57,37 @@ class AssociationAddManager
                 ->setCellphone($cellphone)
                 ->setEmail($email)
                 ->setAddress($address)
+                ->setDateUpdate(new DateTime());
+
+            $this->entityManager->flush();
+
+            return $association;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Delete an association
+     *
+     * @param string $associationUUID
+     *
+     * @return Association
+     * @throws Exception
+     */
+    public function delete(string $associationUUID): Association
+    {
+        try {
+            /** @var Association $association */
+            $association = $this->entityManager->getRepository(Association::class)->findOneBy([
+                'uuid' => $associationUUID
+            ]);
+
+            $now = new DateTime();
+
+            $association
+                ->setDateUpdate($now)
+                ->setDeleted($now)
             ;
 
             $this->entityManager->flush();

@@ -142,7 +142,6 @@ class AssociationAddController extends AbstractFOSRestController
             );
 
             return $association;
-
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

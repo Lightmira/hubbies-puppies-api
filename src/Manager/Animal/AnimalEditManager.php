@@ -100,7 +100,13 @@ class AnimalEditManager
             $animal = $this->entityManager->getRepository(Animal::class)->findOneBy([
                 'uuid' => $animalUUID
             ]);
-            $animal->setDeleted(new DateTime());
+
+            $now = new DateTime();
+
+            $animal
+                ->setDateUpdate($now)
+                ->setDeleted($now)
+            ;
 
             $this->entityManager->flush();
 

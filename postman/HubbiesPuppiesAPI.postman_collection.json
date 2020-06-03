@@ -9,7 +9,7 @@
 			"name": "Animal",
 			"item": [
 				{
-					"name": "ADD Animal",
+					"name": "Add Animal",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Snoopy\",\n\t\"gender\": \"male\",\n\t\"age\": 7,\n\t\"description\": \"Ce chien est trop choupi je l'adore !\",\n\t\"association_id\": \"292130ec-5823-4ea0-9558-1aec58179725\",\n\t\"breed_id\": \"f99f7cae-2a38-481b-929b-128bbffb5ff9\",\n\t\"species_id\": \"968a4bab-6a0b-4eab-99f9-90deefbe3009\"\n}"
+							"raw": "{\n\t\"name\": \"Snoopy\",\n\t\"gender\": \"male\",\n\t\"age\": 7,\n\t\"description\": \"Ce chien est trop choupi je l'adore !\",\n\t\"association_id\": \"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e\",\n\t\"breed_id\": \"989ed117-be5a-477a-bd8a-7d50fd510907\",\n\t\"species_id\": \"b57ce3a7-8c35-4da0-8c12-236e0bd949de\"\n}"
 						},
 						"url": {
 							"raw": "{{baseURL}}/api/animals",
@@ -36,6 +36,85 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "View Animal",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"animals",
+								"b1a189a6-1be6-49f1-aa8a-c3ed9108f925"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Animal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"ScoobyDoo\",\n\t\"gender\": \"male\",\n\t\"age\": 17,\n\t\"description\": \"Ce chien est trop choupi je l'adore !\",\n\t\"association_id\": \"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e\",\n\t\"breed_id\": \"989ed117-be5a-477a-bd8a-7d50fd510907\",\n\t\"species_id\": \"b57ce3a7-8c35-4da0-8c12-236e0bd949de\"\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"animals",
+								"b1a189a6-1be6-49f1-aa8a-c3ed9108f925"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Animal",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"animals",
+								"b1a189a6-1be6-49f1-aa8a-c3ed9108f925"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -44,7 +123,7 @@
 			"name": "Association",
 			"item": [
 				{
-					"name": "ADD Association",
+					"name": "Add Association",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -71,6 +150,85 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "View Association",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"associations",
+								"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Association",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"SPA\",\n    \"logo\": \"logo.png\",\n    \"description\": \"SPA sucks\",\n    \"phone\": \"0164585960\",\n    \"cellphone\": \"0664585960\",\n    \"email\": \"contact@spa.fr\",\n    \"address\": \"42 Queen street\"\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"associations",
+								"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Association",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"associations",
+								"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -79,7 +237,7 @@
 			"name": "Breed",
 			"item": [
 				{
-					"name": "ADD Breed",
+					"name": "Add Breed",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -114,7 +272,7 @@
 			"name": "Species",
 			"item": [
 				{
-					"name": "ADD Species",
+					"name": "Add Species",
 					"request": {
 						"method": "POST",
 						"header": [
