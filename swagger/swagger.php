@@ -9,18 +9,8 @@ use OpenApi\Annotations as OA;
  * )
  *
  * @OA\Server(
- *     url="http://dev.hubbies-puppies.fr",
+ *     url="http://api.hubbies-puppies.com:9082",
  *     description="HUBBIES PUPPIES DEV API"
- * )
- *
- * @OA\Server(
- *     url="http://staging.hubbies-puppies.fr",
- *     description="HUBBIES PUPPIES STAGING PI"
- * )
- *
- * @OA\Server(
- *     url="http://preprod.hubbies-puppies.fr",
- *     description="HUBBIES PUPPIES PREPROD API"
  * )
  *
  * @OA\SecurityScheme(

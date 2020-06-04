@@ -45,7 +45,37 @@ class AnimalAddController extends AbstractFOSRestController
      *             @OA\Property(
      *                 property="description",
      *                 ref="#/components/schemas/Animal/properties/description",
-     *             )
+     *             ),
+     *             @OA\Parameter(
+     *                 name="associationUUID",
+     *                 in="path",
+     *                 description="uuid of an association",
+     *                 required=true,
+     *                 example="bd6bc279-2a0c-40cc-ae94-cb6c1697cf64",
+     *                 @OA\Schema(
+     *                     type="string"
+     *                 )
+     *             ),
+     *             @OA\Parameter(
+     *                 name="breedUUID",
+     *                 in="path",
+     *                 description="uuid of a breed",
+     *                 required=true,
+     *                 example="bd6bc279-2a0c-40cc-ae94-cb6c1697cf64",
+     *                 @OA\Schema(
+     *                     type="string"
+     *                 )
+     *             ),
+     *             @OA\Parameter(
+     *                 name="speciesUUID",
+     *                 in="path",
+     *                 description="uuid of a species",
+     *                 required=true,
+     *                 example="bd6bc279-2a0c-40cc-ae94-cb6c1697cf64",
+     *                 @OA\Schema(
+     *                     type="string"
+     *                 )
+     *             ),
      *         ),
      *     ),
      *     @OA\Response(

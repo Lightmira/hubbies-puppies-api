@@ -127,7 +127,7 @@ class Animal
      * @OA\Property(
      *     type="integer",
      *     property="age",
-     *     example="42",
+     *     example=10,
      *     nullable=false
      * )
      *
