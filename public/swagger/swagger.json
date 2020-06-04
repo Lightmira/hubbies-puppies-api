@@ -612,6 +612,156 @@
                 ]
             }
         },
+        "/api/breeds/{breedUUID}": {
+            "get": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Get a single Breed from uuid",
+                "parameters": [
+                    {
+                        "name": "breedUUID",
+                        "in": "path",
+                        "description": "uuid of a breed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Breed successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Breed/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Breed/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Edit a Breed",
+                "parameters": [
+                    {
+                        "name": "breedUUID",
+                        "in": "path",
+                        "description": "uuid of a breed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Breed that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Breed/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Breed successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Breed/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Breed/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Delete an Breed",
+                "parameters": [
+                    {
+                        "name": "breedUUID",
+                        "in": "path",
+                        "description": "uuid of an breed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/species": {
             "post": {
                 "tags": [
@@ -652,6 +802,156 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/species/{speciesUUID}": {
+            "get": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Get a single Species from uuid",
+                "parameters": [
+                    {
+                        "name": "speciesUUID",
+                        "in": "path",
+                        "description": "uuid of a species",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Species successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Species/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Species/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Edit a Species",
+                "parameters": [
+                    {
+                        "name": "speciesUUID",
+                        "in": "path",
+                        "description": "uuid of a species",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Species that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Species/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Species successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Species/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Species/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Delete an Species",
+                "parameters": [
+                    {
+                        "name": "speciesUUID",
+                        "in": "path",
+                        "description": "uuid of an species",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"
