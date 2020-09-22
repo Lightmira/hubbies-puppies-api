@@ -211,6 +211,13 @@ class Association
         return $this->uuid;
     }
 
+    public function setUuid(Uuid\UuidInterface $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
     public function getDateCreation(): ?DateTime
     {
         return $this->dateCreation;

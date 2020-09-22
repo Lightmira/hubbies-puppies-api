@@ -8,10 +8,8 @@ DR=docker run
 HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)
 ifdef HAS_DOCKER
 	EXEC_PHP=$(DC) exec php
-	EXEC_NODE=$(DC) exec node
 else
 	EXEC_PHP=
-	EXEC_NODE=
 endif
 .DEFAULT_GOAL := help
 .PHONY: help ## Generate list of targets with descriptions
@@ -34,50 +32,57 @@ start: docker-compose.override.yml
 	$(EXEC_PHP) $(CONSOLE) doctrine:database:create --if-not-exists
 	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
 	$(EXEC_PHP) $(CONSOLE) make:migration
-
 .PHONY: stop ## stop the project
 stop:
 	$(DC) down
-
 .PHONY: exec ## Run bash in the php container
 exec:
 	$(EXEC_PHP) /bin/bash
-
 .PHONY: build ## Rebuild
 build:
 	$(DC) pull || true
 	$(DC) build
 	$(DC) up -d
-
+.PHONY: drop ## Drop the database
+dbDrop:
+	$(EXEC_PHP) $(CONSOLE) doctrine:database:drop --force
+.PHONY: dbCreate ## Create the database
+dbCreate:
+	$(EXEC_PHP) $(CONSOLE) doctrine:database:create --if-not-exists
+	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
+	$(EXEC_PHP) $(CONSOLE) make:migration
+.PHONY: dummy ## Load dummy data
+dummy:
+	$(EXEC_PHP) $(CONSOLE) doctrine:database:drop --force
+	$(EXEC_PHP) $(CONSOLE) doctrine:database:create --if-not-exists
+	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
+	$(EXEC_PHP) $(CONSOLE) make:migration
+	$(EXEC_PHP) $(CONSOLE) doctrine:fixtures:load
+.PHONY: d ## Load dummy data
+d:
+	$(EXEC_PHP) $(CONSOLE) doctrine:fixtures:load
 ##
 ## Shortcuts outside container
 ##---------------------------------------------------------------------------
-
 .PHONY: buildb ## Rebuild the db
 buildb:
-	$(EXEC) $(CONSOLE) d:d:d --force
-	$(EXEC) $(CONSOLE) d:d:c
-	$(EXEC) $(CONSOLE) d:s:c
+	$(EXEC_PHP) $(CONSOLE) d:d:d --force
+	$(EXEC_PHP) $(CONSOLE) d:d:c
+	$(EXEC_PHP) $(CONSOLE) d:s:c
 	make start
-
 .PHONY: entity ## Call make:entity
 entity:
 	$(EXEC_PHP) $(CONSOLE) make:entity
-
 .PHONY: controller ## Call make:controller
 controller:
 	$(EXEC_PHP) $(CONSOLE) make:controller
-
 .PHONY: form ## Call make:form
 form:
 	$(EXEC_PHP) $(CONSOLE) make:form
-
 ##
 ## Dependencies & environment Files
 ##---------------------------------------------------------------------------
-
 docker-compose.override.yml: docker-compose.override.yml.dist
 	$(RUN) cp docker-compose.override.yml.dist docker-compose.override.yml
-
 .env.local: .env
 	$(RUN) cp .env .env.local
