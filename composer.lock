@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7eb6983a88d705d30eb18aedda863b9",
+    "content-hash": "189b4a44f53ec31942a059888a38b047",
     "packages": [
         {
             "name": "brick/math",
@@ -4200,16 +4200,16 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v4.4.9",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "54526b598d7fc86a67850488b194a88a79ab8467"
+                "reference": "2bb7b90ecdc79813c0bf237b7ff20e79062b5188"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/54526b598d7fc86a67850488b194a88a79ab8467",
-                "reference": "54526b598d7fc86a67850488b194a88a79ab8467",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/2bb7b90ecdc79813c0bf237b7ff20e79062b5188",
+                "reference": "2bb7b90ecdc79813c0bf237b7ff20e79062b5188",
                 "shasum": ""
             },
             "require": {
@@ -4287,7 +4287,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2020-05-31T05:25:51+00:00"
+            "time": "2020-09-02T08:09:29+00:00"
         },
         {
             "name": "symfony/mime",
