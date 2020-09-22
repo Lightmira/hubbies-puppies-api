@@ -20,6 +20,94 @@ class AssociationViewController extends AbstractFOSRestController
 
     /**
      * @OA\Get(
+     *     path="/api/associations",
+     *     summary="Get all Associations",
+     *     tags={"Association"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Association successfully displayed",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="data",
+     *                 @OA\Items(
+     *                     @OA\Property(
+     *                         property="uuid",
+     *                         ref="#/components/schemas/Association/properties/uuid"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="name",
+     *                         ref="#/components/schemas/Association/properties/name"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="logo",
+     *                         ref="#/components/schemas/Association/properties/logo"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="description",
+     *                         ref="#/components/schemas/Association/properties/description"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="phone",
+     *                         ref="#/components/schemas/Association/properties/phone"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="cellphone",
+     *                         ref="#/components/schemas/Association/properties/cellphone"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="email",
+     *                         ref="#/components/schemas/Association/properties/email"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="address",
+     *                         ref="#/components/schemas/Association/properties/address"
+     *                     ),
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         ref="#/components/responses/association_404",
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         ref="#/components/responses/error_500",
+     *     ),
+     *     security={
+     *         {
+     *             "bearer": {}
+     *         }
+     *     }
+     * )
+     */
+    /**
+     * Get an association
+     *
+     * @Rest\Get(
+     *     path = "/api/associations",
+     *     name = "get_associations",
+     * )
+     *
+     * @Rest\View(statusCode=200)
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var Association[] $associations */
+            $associations = $this->associationViewManager->getAll();
+
+            return ['data' => $associations];
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+
+    }
+
+    /**
+     * @OA\Get(
      *     path="/api/associations/{associationUUID}",
      *     summary="Get a single Association from uuid",
      *     tags={"Association"},
@@ -87,7 +175,6 @@ class AssociationViewController extends AbstractFOSRestController
      *     }
      * )
      */
-
     /**
      * Get an association
      *

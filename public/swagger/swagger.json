@@ -12,6 +12,60 @@
     ],
     "paths": {
         "/api/animals": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Get all Animals",
+                "responses": {
+                    "200": {
+                        "description": "Animals successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/Animal/properties/uuid"
+                                                    },
+                                                    "name": {
+                                                        "$ref": "#/components/schemas/Animal/properties/name"
+                                                    },
+                                                    "gender": {
+                                                        "$ref": "#/components/schemas/Animal/properties/gender"
+                                                    },
+                                                    "age": {
+                                                        "$ref": "#/components/schemas/Animal/properties/age"
+                                                    },
+                                                    "description": {
+                                                        "$ref": "#/components/schemas/Animal/properties/description"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Animal"
@@ -116,7 +170,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Animal successfully edited",
+                        "description": "Animal successfully displayed",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -274,6 +328,69 @@
             }
         },
         "/api/associations": {
+            "get": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Get all Associations",
+                "responses": {
+                    "200": {
+                        "description": "Association successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "uuid": {
+                                                        "$ref": "#/components/schemas/Association/properties/uuid"
+                                                    },
+                                                    "name": {
+                                                        "$ref": "#/components/schemas/Association/properties/name"
+                                                    },
+                                                    "logo": {
+                                                        "$ref": "#/components/schemas/Association/properties/logo"
+                                                    },
+                                                    "description": {
+                                                        "$ref": "#/components/schemas/Association/properties/description"
+                                                    },
+                                                    "phone": {
+                                                        "$ref": "#/components/schemas/Association/properties/phone"
+                                                    },
+                                                    "cellphone": {
+                                                        "$ref": "#/components/schemas/Association/properties/cellphone"
+                                                    },
+                                                    "email": {
+                                                        "$ref": "#/components/schemas/Association/properties/email"
+                                                    },
+                                                    "address": {
+                                                        "$ref": "#/components/schemas/Association/properties/address"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Association"
@@ -568,6 +685,51 @@
             }
         },
         "/api/breeds": {
+            "get": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Get all Breeds",
+                "responses": {
+                    "200": {
+                        "description": "Breeds successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/Breed/properties/uuid"
+                                                    },
+                                                    "label": {
+                                                        "$ref": "#/components/schemas/Breed/properties/label"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Breed"
@@ -639,7 +801,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Breed successfully edited",
+                        "description": "Breed successfully displayed",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -770,6 +932,51 @@
             }
         },
         "/api/species": {
+            "get": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Get all Species",
+                "responses": {
+                    "200": {
+                        "description": "Species successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/Species/properties/uuid"
+                                                    },
+                                                    "label": {
+                                                        "$ref": "#/components/schemas/Species/properties/label"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Species"
@@ -841,7 +1048,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Species successfully edited",
+                        "description": "Species successfully displayed",
                         "content": {
                             "application/json": {
                                 "schema": {

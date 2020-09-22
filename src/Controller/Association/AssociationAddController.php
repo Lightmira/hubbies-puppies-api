@@ -114,11 +114,12 @@ class AssociationAddController extends AbstractFOSRestController
     /**
      * Add an Association
      *
-     * @Route("/api/associations", name="post_association")
+     * @Rest\Post(
+     *     path = "/api/associations",
+     *     name = "post_association",
+     * )
      *
-     * @Rest\View(statusCode=201, serializerGroups={
-     *     "association_default",
-     * })
+     * @Rest\View(statusCode=201, serializerGroups={"association_default"})
      */
     public function add(Request $request): Association
     {

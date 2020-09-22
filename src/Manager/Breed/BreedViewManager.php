@@ -17,8 +17,22 @@ class BreedViewManager
     }
 
     /**
-     * Get one breed data
-     *
+     * @return Breed[]
+     * @throws Exception
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var Breed[] $breeds */
+            $breeds = $this->entityManager->getRepository(Breed::class)->findAll();
+
+            return $breeds;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
      * @param string $breedUUID
      *
      * @return Breed

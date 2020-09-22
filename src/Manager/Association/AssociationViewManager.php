@@ -17,8 +17,22 @@ class AssociationViewManager
     }
 
     /**
-     * Get one association data
-     *
+     * @return Association[]
+     * @throws Exception
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var $associations[] $associations */
+            $associations = $this->entityManager->getRepository(Association::class)->findAll();
+
+            return $associations;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
      * @param string $associationUUID
      *
      * @return Association

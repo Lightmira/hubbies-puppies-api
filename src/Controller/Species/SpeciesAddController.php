@@ -66,11 +66,12 @@ class SpeciesAddController extends AbstractFOSRestController
     /**
      * Add a Species
      *
-     * @Route("/api/species", name="post_species")
+     * @Rest\Post(
+     *     path = "/api/species",
+     *     name = "post_species",
+     * )
      *
-     * @Rest\View(statusCode=201, serializerGroups={
-     *     "species_default",
-     * })
+     * @Rest\View(statusCode=201, serializerGroups={"species_default"})
      */
     public function add(Request $request): Species
     {

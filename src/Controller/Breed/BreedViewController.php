@@ -20,6 +20,69 @@ class BreedViewController extends AbstractFOSRestController
 
     /**
      * @OA\Get(
+     *     path="/api/breeds",
+     *     summary="Get all Breeds",
+     *     tags={"Breed"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Breeds successfully displayed",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="data",
+     *                 @OA\Items(
+     *                     @OA\Property(
+     *                         property="id",
+     *                         ref="#/components/schemas/Breed/properties/uuid",
+     *                     ),
+     *                     @OA\Property(
+     *                         property="label",
+     *                         ref="#/components/schemas/Breed/properties/label",
+     *                     ),
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         ref="#/components/responses/breed_404",
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         ref="#/components/responses/error_500",
+     *     ),
+     *     security={
+     *         {
+     *             "bearer": {}
+     *         }
+     *     }
+     * )
+     */
+    /**
+     * Get all breeds
+     *
+     * @Rest\Get(
+     *     path = "/api/breeds",
+     *     name = "get_breeds",
+     * )
+     *
+     * @Rest\View(statusCode=200)
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var Breed[] $breeds */
+            $breeds = $this->breedViewManager->getAll();
+
+            return ['data' => $breeds];
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * @OA\Get(
      *     path="/api/breeds/{breedUUID}",
      *     summary="Get a single Breed from uuid",
      *     tags={"Breed"},
@@ -35,7 +98,7 @@ class BreedViewController extends AbstractFOSRestController
      *     ),
      *     @OA\Response(
      *         response="200",
-     *         description="Breed successfully edited",
+     *         description="Breed successfully displayed",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(
@@ -63,7 +126,6 @@ class BreedViewController extends AbstractFOSRestController
      *     }
      * )
      */
-
     /**
      * Get a breed
      *
