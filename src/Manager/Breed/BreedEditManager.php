@@ -18,8 +18,6 @@ class BreedEditManager
     }
 
     /**
-     * Edit a breed
-     *
      * @param string $breedUUID
      * @param string $label
      *
@@ -50,14 +48,11 @@ class BreedEditManager
     }
 
     /**
-     * Delete a breed
-     *
      * @param string $breedUUID
      *
-     * @return Breed
      * @throws Exception
      */
-    public function delete(string $breedUUID): Breed
+    public function delete(string $breedUUID): void
     {
         try {
             /** @var Breed $breed */
@@ -74,7 +69,7 @@ class BreedEditManager
 
             $this->entityManager->flush();
 
-            return $breed;
+            return;
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

@@ -66,7 +66,10 @@ class BreedAddController extends AbstractFOSRestController
     /**
      * Add a Breed
      *
-     * @Route("/api/breeds", name="post_breed")
+     * @Rest\Post(
+     *     path = "/api/breeds",
+     *     name = "post_breed",
+     * )
      *
      * @Rest\View(statusCode=201, serializerGroups={"breed_default"})
      */

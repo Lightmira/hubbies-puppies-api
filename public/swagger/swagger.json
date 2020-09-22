@@ -568,6 +568,51 @@
             }
         },
         "/api/breeds": {
+            "get": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Get all Breeds",
+                "responses": {
+                    "200": {
+                        "description": "Breeds successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/Breed/properties/uuid"
+                                                    },
+                                                    "label": {
+                                                        "$ref": "#/components/schemas/Breed/properties/label"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Breed"
@@ -639,7 +684,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Breed successfully edited",
+                        "description": "Breed successfully displayed",
                         "content": {
                             "application/json": {
                                 "schema": {
