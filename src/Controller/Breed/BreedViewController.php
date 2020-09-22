@@ -59,7 +59,6 @@ class BreedViewController extends AbstractFOSRestController
      *     }
      * )
      */
-
     /**
      * Get all breeds
      *
@@ -80,7 +79,6 @@ class BreedViewController extends AbstractFOSRestController
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
-
     }
 
     /**
@@ -128,7 +126,6 @@ class BreedViewController extends AbstractFOSRestController
      *     }
      * )
      */
-
     /**
      * Get a breed
      *

@@ -20,6 +20,70 @@ class SpeciesViewController extends AbstractFOSRestController
 
     /**
      * @OA\Get(
+     *     path="/api/species",
+     *     summary="Get all Species",
+     *     tags={"Species"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Species successfully displayed",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="data",
+     *                 @OA\Items(
+     *                     @OA\Property(
+     *                         property="id",
+     *                         ref="#/components/schemas/Species/properties/uuid",
+     *                     ),
+     *                     @OA\Property(
+     *                         property="label",
+     *                         ref="#/components/schemas/Species/properties/label",
+     *                     ),
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         ref="#/components/responses/species_404",
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         ref="#/components/responses/error_500",
+     *     ),
+     *     security={
+     *         {
+     *             "bearer": {}
+     *         }
+     *     }
+     * )
+     */
+    /**
+     * Get all species
+     *
+     * @Rest\Get(
+     *     path = "/api/species",
+     *     name = "get_speciess",
+     * )
+     *
+     * @Rest\View(statusCode=200)
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var Species[] $species */
+            $species = $this->speciesViewManager->getAll();
+
+            return ['data' => $species];
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+
+    }
+
+    /**
+     * @OA\Get(
      *     path="/api/species/{speciesUUID}",
      *     summary="Get a single Species from uuid",
      *     tags={"Species"},
@@ -35,7 +99,7 @@ class SpeciesViewController extends AbstractFOSRestController
      *     ),
      *     @OA\Response(
      *         response="200",
-     *         description="Species successfully edited",
+     *         description="Species successfully displayed",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(
@@ -63,7 +127,6 @@ class SpeciesViewController extends AbstractFOSRestController
      *     }
      * )
      */
-
     /**
      * Get a species
      *

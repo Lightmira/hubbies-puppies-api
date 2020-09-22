@@ -20,6 +20,81 @@ class AnimalViewController extends AbstractFOSRestController
 
     /**
      * @OA\Get(
+     *     path="/api/animals",
+     *     summary="Get all Animals",
+     *     tags={"Animal"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Animals successfully displayed",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="data",
+     *                 @OA\Items(
+     *                     @OA\Property(
+     *                         property="id",
+     *                         ref="#/components/schemas/Animal/properties/uuid",
+     *                     ),
+     *                     @OA\Property(
+     *                         property="name",
+     *                         ref="#/components/schemas/Animal/properties/name",
+     *                     ),
+     *                     @OA\Property(
+     *                         property="gender",
+     *                         ref="#/components/schemas/Animal/properties/gender",
+     *                     ),
+     *                     @OA\Property(
+     *                         property="age",
+     *                         ref="#/components/schemas/Animal/properties/age",
+     *                     ),
+     *                     @OA\Property(
+     *                         property="description",
+     *                         ref="#/components/schemas/Animal/properties/description",
+     *                     ),
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         ref="#/components/responses/animal_404",
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         ref="#/components/responses/error_500",
+     *     ),
+     *     security={
+     *         {
+     *             "bearer": {}
+     *         }
+     *     }
+     * )
+     */
+    /**
+     * Get all animals
+     *
+     * @Rest\Get(
+     *     path = "/api/animals",
+     *     name = "get_animals",
+     * )
+     *
+     * @Rest\View(statusCode=200)
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var Animal[] $animals */
+            $animals = $this->animalViewManager->getAll();
+
+            return ['data' => $animals];
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * @OA\Get(
      *     path="/api/animals/{animalUUID}",
      *     summary="Get a single Animal from uuid",
      *     tags={"Animal"},
@@ -35,7 +110,7 @@ class AnimalViewController extends AbstractFOSRestController
      *     ),
      *     @OA\Response(
      *         response="200",
-     *         description="Animal successfully edited",
+     *         description="Animal successfully displayed",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(
@@ -75,7 +150,6 @@ class AnimalViewController extends AbstractFOSRestController
      *     }
      * )
      */
-
     /**
      * Get an animal
      *

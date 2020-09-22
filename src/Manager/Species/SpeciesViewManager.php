@@ -17,8 +17,22 @@ class SpeciesViewManager
     }
 
     /**
-     * Get one species data
-     *
+     * @return Species[]
+     * @throws Exception
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var Species[] $species */
+            $species = $this->entityManager->getRepository(Species::class)->findAll();
+
+            return $species;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
      * @param string $speciesUUID
      *
      * @return Species

@@ -17,8 +17,22 @@ class AnimalViewManager
     }
 
     /**
-     * Get one animal data
-     *
+     * @return Animal[]
+     * @throws Exception
+     */
+    public function getAll(): array
+    {
+        try {
+            /** @var Animal[] $animals */
+            $animals = $this->entityManager->getRepository(Animal::class)->findAll();
+
+            return $animals;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
      * @param string $animalUUID
      *
      * @return Animal
