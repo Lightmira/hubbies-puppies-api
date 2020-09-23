@@ -8,6 +8,7 @@
         "friendsofsymfony/rest-bundle": "^2.7",
         "fzaninotto/faker": "^1.9",
         "jms/serializer-bundle": "^3.6",
+        "lexik/jwt-authentication-bundle": "^2.8",
         "mhujer/jms-serializer-uuid": "^3.2",
         "ramsey/uuid-doctrine": "^1.6",
         "sensio/framework-extra-bundle": "^5.5",
