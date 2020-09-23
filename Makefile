@@ -20,9 +20,11 @@ help:
 		| sed 's/\(^##\)//' \
 		| sed 's/\(##\)/\t/' \
 		| expand -t14
-##
+
+##---------------------------------------------------------------------------
 ## Project setup & day to day shortcuts
 ##---------------------------------------------------------------------------
+
 .PHONY: start ## Start the project (Install in first place)
 start: docker-compose.override.yml
 	$(DC) pull || true
@@ -57,13 +59,12 @@ dummy:
 	$(EXEC_PHP) $(CONSOLE) doctrine:database:create --if-not-exists
 	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
 	$(EXEC_PHP) $(CONSOLE) make:migration
-	$(EXEC_PHP) $(CONSOLE) doctrine:fixtures:load
-.PHONY: d ## Load dummy data
-d:
-	$(EXEC_PHP) $(CONSOLE) doctrine:fixtures:load
-##
+	$(EXEC_PHP) $(CONSOLE) doctrine:fixtures:load -q
+
+##---------------------------------------------------------------------------
 ## Shortcuts outside container
 ##---------------------------------------------------------------------------
+
 .PHONY: buildb ## Rebuild the db
 buildb:
 	$(EXEC_PHP) $(CONSOLE) d:d:d --force
@@ -79,9 +80,11 @@ controller:
 .PHONY: form ## Call make:form
 form:
 	$(EXEC_PHP) $(CONSOLE) make:form
-##
+
+##---------------------------------------------------------------------------
 ## Dependencies & environment Files
 ##---------------------------------------------------------------------------
+
 docker-compose.override.yml: docker-compose.override.yml.dist
 	$(RUN) cp docker-compose.override.yml.dist docker-compose.override.yml
 .env.local: .env
