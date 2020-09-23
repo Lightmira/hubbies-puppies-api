@@ -60,17 +60,21 @@ dummy:
 	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
 	$(EXEC_PHP) $(CONSOLE) make:migration
 	$(EXEC_PHP) $(CONSOLE) doctrine:fixtures:load -q
+.PHONY: migration ## Make migration & update schema
+migration:
+	$(EXEC_PHP) $(CONSOLE) make:migration
+	$(EXEC_PHP) $(CONSOLE) doctrine:migrations:migrate
+.PHONY: cachedev ## Clear dev cache
+cachedev:
+	$(EXEC_PHP) $(CONSOLE) cache:clear
+.PHONY: cacheprod ## Clear prod cache
+cacheprod:
+	$(EXEC_PHP) $(CONSOLE) cache:clear --prod
 
 ##---------------------------------------------------------------------------
 ## Shortcuts outside container
 ##---------------------------------------------------------------------------
 
-.PHONY: buildb ## Rebuild the db
-buildb:
-	$(EXEC_PHP) $(CONSOLE) d:d:d --force
-	$(EXEC_PHP) $(CONSOLE) d:d:c
-	$(EXEC_PHP) $(CONSOLE) d:s:c
-	make start
 .PHONY: entity ## Call make:entity
 entity:
 	$(EXEC_PHP) $(CONSOLE) make:entity
@@ -80,6 +84,18 @@ controller:
 .PHONY: form ## Call make:form
 form:
 	$(EXEC_PHP) $(CONSOLE) make:form
+.PHONY: command ## Call make:command
+command:
+	$(EXEC_PHP) $(CONSOLE) make:command
+
+##---------------------------------------------------------------------------
+## Shortcuts commands
+##---------------------------------------------------------------------------
+
+.PHONY: admin ## Call create:admin
+admin:
+	$(EXEC_PHP) $(CONSOLE) create:admin
+
 
 ##---------------------------------------------------------------------------
 ## Dependencies & environment Files

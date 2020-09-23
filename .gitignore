@@ -12,3 +12,6 @@
 ###> docker ###
 docker-compose.override.yml
 ###< docker ###
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
