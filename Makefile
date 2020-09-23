@@ -45,7 +45,7 @@ build:
 	$(DC) pull || true
 	$(DC) build
 	$(DC) up -d
-.PHONY: drop ## Drop the database
+.PHONY: dbDrop ## Drop the database
 dbDrop:
 	$(EXEC_PHP) $(CONSOLE) doctrine:database:drop --force
 .PHONY: dbCreate ## Create the database
@@ -53,6 +53,13 @@ dbCreate:
 	$(EXEC_PHP) $(CONSOLE) doctrine:database:create --if-not-exists
 	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
 	$(EXEC_PHP) $(CONSOLE) make:migration
+.PHONY: dbUpdate ## Update database structure
+dbUpdate:
+	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
+	$(EXEC_PHP) $(CONSOLE) make:migration
+.PHONY: dbMigration ## Make migration
+dbMigration:
+	$(EXEC_PHP) $(CONSOLE) doctrine:migrations:migrate
 .PHONY: dummy ## Load dummy data
 dummy:
 	$(EXEC_PHP) $(CONSOLE) doctrine:database:drop --force
@@ -60,10 +67,6 @@ dummy:
 	$(EXEC_PHP) $(CONSOLE) doctrine:schema:update --force
 	$(EXEC_PHP) $(CONSOLE) make:migration
 	$(EXEC_PHP) $(CONSOLE) doctrine:fixtures:load -q
-.PHONY: migration ## Make migration & update schema
-migration:
-	$(EXEC_PHP) $(CONSOLE) make:migration
-	$(EXEC_PHP) $(CONSOLE) doctrine:migrations:migrate
 .PHONY: cachedev ## Clear dev cache
 cachedev:
 	$(EXEC_PHP) $(CONSOLE) cache:clear

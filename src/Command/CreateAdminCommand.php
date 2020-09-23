@@ -3,8 +3,11 @@
 namespace App\Command;
 
 use App\Entity\User;
+use DateInterval;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,14 +38,21 @@ class CreateAdminCommand extends Command
         $question = new Question('Password : ', false);
         $pwd = $helper->ask($input, $output, $question);
 
+        $date = new DateTime();
+
         if (!$this->em->getRepository(User::class)->findOneBy(['email' => $email])) {
             $user = new User();
             $this->em->persist($user);
 
             $user
+                ->setUuid(Uuid::uuid4())
                 ->setEmail($email)
                 ->setPassword(password_hash($pwd, PASSWORD_BCRYPT))
-                ->setRoles(['ROLE_ADMIN']);
+                ->setRoles(['ROLE_ADMIN'])
+                ->setDateCreation($date)
+                ->setFirstName('Admin')
+                ->setLastName('istrateur')
+                ->setBirthDate($date->sub(new DateInterval('P30Y')));
 
             $this->em->flush();
 
