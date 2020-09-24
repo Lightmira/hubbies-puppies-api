@@ -25,9 +25,9 @@
 							"raw": "{\n\t\"name\": \"Snoopy\",\n\t\"gender\": \"male\",\n\t\"age\": 7,\n\t\"description\": \"Ce chien est trop choupi je l'adore !\",\n\t\"association_id\": \"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e\",\n\t\"breed_id\": \"989ed117-be5a-477a-bd8a-7d50fd510907\",\n\t\"species_id\": \"b57ce3a7-8c35-4da0-8c12-236e0bd949de\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/animals",
+							"raw": "{{apiUrlProduction}}/api/animals",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -38,7 +38,7 @@
 					"response": []
 				},
 				{
-					"name": "View Animal",
+					"name": "View Animal (one)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -49,14 +49,38 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
+							"raw": "{{apiUrlProduction}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
 								"animals",
 								"b1a189a6-1be6-49f1-aa8a-c3ed9108f925"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Animal (all)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrlProduction}}/api/animals",
+							"host": [
+								"{{apiUrlProduction}}"
+							],
+							"path": [
+								"api",
+								"animals"
 							]
 						}
 					},
@@ -78,9 +102,9 @@
 							"raw": "{\n\t\"name\": \"ScoobyDoo\",\n\t\"gender\": \"male\",\n\t\"age\": 17,\n\t\"description\": \"Ce chien est trop choupi je l'adore !\",\n\t\"association_id\": \"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e\",\n\t\"breed_id\": \"989ed117-be5a-477a-bd8a-7d50fd510907\",\n\t\"species_id\": \"b57ce3a7-8c35-4da0-8c12-236e0bd949de\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
+							"raw": "{{apiUrlProduction}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -103,9 +127,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
+							"raw": "{{apiUrlProduction}}/api/animals/b1a189a6-1be6-49f1-aa8a-c3ed9108f925",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -139,9 +163,9 @@
 							"raw": "{\n\t\"name\": \"Melt'in Pets\",\n\t\"logo\": \"logo.png\",\n\t\"description\": \"Melt'in Pets has been created in 2005, ...\",\n\t\"phone\": \"0164585960\",\n\t\"cellphone\": \"0664585960\",\n\t\"email\": \"contact@metingpets.fr\",\n\t\"address\": \"42 Queen street\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/associations",
+							"raw": "{{apiUrlProduction}}/api/associations",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -152,7 +176,7 @@
 					"response": []
 				},
 				{
-					"name": "View Association",
+					"name": "View Association (one)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -163,9 +187,73 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
+							"raw": "{{apiUrlProduction}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
+							],
+							"path": [
+								"api",
+								"associations",
+								"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Association (all)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerAdminAPIProd}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrlProduction}}/api/associations",
+							"host": [
+								"{{apiUrlProduction}}"
+							],
+							"path": [
+								"api",
+								"associations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Association",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrlProduction}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
+							"host": [
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -192,34 +280,9 @@
 							"raw": "{\n    \"name\": \"SPA\",\n    \"logo\": \"logo.png\",\n    \"description\": \"SPA sucks\",\n    \"phone\": \"0164585960\",\n    \"cellphone\": \"0664585960\",\n    \"email\": \"contact@spa.fr\",\n    \"address\": \"42 Queen street\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
+							"raw": "{{apiUrlProduction}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
 							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"api",
-								"associations",
-								"92f87c6e-1ed7-47d2-9415-8bd4fd9b141e"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Association",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseURL}}/api/associations/92f87c6e-1ed7-47d2-9415-8bd4fd9b141e",
-							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -239,6 +302,21 @@
 				{
 					"name": "Add Breed",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -250,12 +328,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"label\": \"Berger Allemand\"\n}"
+							"raw": "{\n\t\"label\": \"Chihuahua\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/breeds",
+							"raw": "{{apiUrlProduction}}/api/breeds",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -266,8 +344,23 @@
 					"response": []
 				},
 				{
-					"name": "View Breed",
+					"name": "View Breed (one)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -277,14 +370,53 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/api/breeds/989ed117-be5a-477a-bd8a-7d50fd510907",
+							"raw": "{{apiUrlProduction}}/api/breeds/0dae446a-bab6-4c87-849c-da54ac00f194",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
 								"breeds",
-								"989ed117-be5a-477a-bd8a-7d50fd510907"
+								"0dae446a-bab6-4c87-849c-da54ac00f194"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Breed (all)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerAdminAPIProd}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrlProduction}}/api/breeds",
+							"host": [
+								"{{apiUrlProduction}}"
+							],
+							"path": [
+								"api",
+								"breeds"
 							]
 						}
 					},
@@ -293,6 +425,21 @@
 				{
 					"name": "Edit Breed",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -303,17 +450,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"label\": \"Labrador\"\n}"
+							"raw": "{\n\t\"label\": \"Pincher\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/breeds/989ed117-be5a-477a-bd8a-7d50fd510907",
+							"raw": "{{apiUrlDev}}/api/breeds/83bb53b0-ce1f-4d27-90ed-30f7cfede855",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlDev}}"
 							],
 							"path": [
 								"api",
 								"breeds",
-								"989ed117-be5a-477a-bd8a-7d50fd510907"
+								"83bb53b0-ce1f-4d27-90ed-30f7cfede855"
 							]
 						}
 					},
@@ -331,14 +478,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/api/breeds/989ed117-be5a-477a-bd8a-7d50fd510907",
+							"raw": "{{apiUrlDev}}/api/breeds/b648e6bc-bbfb-484c-b44c-d36ccfb9e3cd",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlDev}}"
 							],
 							"path": [
 								"api",
 								"breeds",
-								"989ed117-be5a-477a-bd8a-7d50fd510907"
+								"b648e6bc-bbfb-484c-b44c-d36ccfb9e3cd"
 							]
 						}
 					},
@@ -367,9 +514,9 @@
 							"raw": "{\n\t\"label\": \"Chien\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/species",
+							"raw": "{{apiUrlProduction}}/api/species",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
@@ -380,7 +527,7 @@
 					"response": []
 				},
 				{
-					"name": "View Species",
+					"name": "View Species (one)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -391,14 +538,53 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/api/species/b57ce3a7-8c35-4da0-8c12-236e0bd949de",
+							"raw": "{{apiUrlProduction}}/api/species/5b6adb70-4dc5-4756-b7cd-90bb27d1d34b",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
 								"species",
-								"b57ce3a7-8c35-4da0-8c12-236e0bd949de"
+								"5b6adb70-4dc5-4756-b7cd-90bb27d1d34b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Species (all)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerAdminAPIProd}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrlProduction}}/api/species",
+							"host": [
+								"{{apiUrlProduction}}"
+							],
+							"path": [
+								"api",
+								"species"
 							]
 						}
 					},
@@ -407,6 +593,21 @@
 				{
 					"name": "Edit Species",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{bearerAdminAPI}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -417,17 +618,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"label\": \"Chat\"\n}"
+							"raw": "{\n\t\"label\": \"Souriceau\"\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/api/species/b57ce3a7-8c35-4da0-8c12-236e0bd949de",
+							"raw": "{{apiUrlProduction}}/api/species/129dd007-9eb2-4e87-815e-fd850804ca1b",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
 								"species",
-								"b57ce3a7-8c35-4da0-8c12-236e0bd949de"
+								"129dd007-9eb2-4e87-815e-fd850804ca1b"
 							]
 						}
 					},
@@ -445,14 +646,86 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/api/species/b57ce3a7-8c35-4da0-8c12-236e0bd949de",
+							"raw": "{{apiUrlProduction}}/api/species/b57ce3a7-8c35-4da0-8c12-236e0bd949de",
 							"host": [
-								"{{baseURL}}"
+								"{{apiUrlProduction}}"
 							],
 							"path": [
 								"api",
 								"species",
 								"b57ce3a7-8c35-4da0-8c12-236e0bd949de"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin@admin.fr\",\n    \"password\": \"admin\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrlProduction}}/api/login_check",
+							"host": [
+								"{{apiUrlProduction}}"
+							],
+							"path": [
+								"api",
+								"login_check"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ecrespi@realmit.io\",\n    \"password\": \"admin\",\n    \"firstName\": \"Etienne\",\n    \"lastName\": \"Crespi\",\n    \"birthDate\": \"2009-06-15 13:45:30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrlDev}}/api/register",
+							"host": [
+								"{{apiUrlDev}}"
+							],
+							"path": [
+								"api",
+								"register"
 							]
 						}
 					},
