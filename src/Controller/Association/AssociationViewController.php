@@ -7,15 +7,22 @@ use App\Manager\Association\AssociationViewManager;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AssociationViewController extends AbstractFOSRestController
 {
     private $associationViewManager;
+    private $serializer;
 
-    public function __construct(AssociationViewManager $associationViewManager)
-    {
+    public function __construct(
+        AssociationViewManager $associationViewManager,
+        SerializerInterface $serializer
+    ) {
         $this->associationViewManager = $associationViewManager;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -93,13 +100,24 @@ class AssociationViewController extends AbstractFOSRestController
      *
      * @Rest\View(statusCode=200)
      */
-    public function getAll(): array
+    public function getAll(): JsonResponse
     {
         try {
             /** @var Association[] $associations */
             $associations = $this->associationViewManager->getAll();
 
-            return ['data' => $associations];
+            $context = new SerializationContext();
+            $context
+                ->setSerializeNull(true)
+                ->setGroups(['association_default']);
+
+            $json = $this->serializer->serialize(
+                $associations,
+                'json',
+                $context
+            );
+
+            return new JsonResponse(['data' => json_decode($json)]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -185,13 +203,24 @@ class AssociationViewController extends AbstractFOSRestController
      *
      * @Rest\View(statusCode=200)
      */
-    public function getOne(string $associationUUID): Association
+    public function getOne(string $associationUUID): JsonResponse
     {
         try {
             /** @var Association $association */
             $association = $this->associationViewManager->get($associationUUID);
 
-            return $association;
+            $context = new SerializationContext();
+            $context
+                ->setSerializeNull(true)
+                ->setGroups(['association_default']);
+
+            $json = $this->serializer->serialize(
+                $association,
+                'json',
+                $context
+            );
+
+            return new JsonResponse(json_decode($json));
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
