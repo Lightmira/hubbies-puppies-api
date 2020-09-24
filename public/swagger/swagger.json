@@ -1,0 +1,1486 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "HUBBIES PUPPIES API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://api.hubbies-puppies.com:9082",
+            "description": "HUBBIES PUPPIES DEV API"
+        }
+    ],
+    "paths": {
+        "/api/animals": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Get all Animals",
+                "responses": {
+                    "200": {
+                        "description": "Animals successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/Animal/properties/uuid"
+                                                    },
+                                                    "name": {
+                                                        "$ref": "#/components/schemas/Animal/properties/name"
+                                                    },
+                                                    "gender": {
+                                                        "$ref": "#/components/schemas/Animal/properties/gender"
+                                                    },
+                                                    "age": {
+                                                        "$ref": "#/components/schemas/Animal/properties/age"
+                                                    },
+                                                    "description": {
+                                                        "$ref": "#/components/schemas/Animal/properties/description"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Add an Animal",
+                "requestBody": {
+                    "description": "Animal that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/Animal/properties/name"
+                                    },
+                                    "gender": {
+                                        "$ref": "#/components/schemas/Animal/properties/gender"
+                                    },
+                                    "age": {
+                                        "$ref": "#/components/schemas/Animal/properties/age"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Animal/properties/description"
+                                    },
+                                    "associationUUID": {
+                                        "description": "uuid of an association",
+                                        "type": "string",
+                                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                                    },
+                                    "breedUUID": {
+                                        "description": "uuid of a breed",
+                                        "type": "string",
+                                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                                    },
+                                    "speciesUUID": {
+                                        "description": "uuid of a species",
+                                        "type": "string",
+                                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Animal successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Animal/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Animal/properties/name"
+                                        },
+                                        "gender": {
+                                            "$ref": "#/components/schemas/Animal/properties/gender"
+                                        },
+                                        "age": {
+                                            "$ref": "#/components/schemas/Animal/properties/age"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Animal/properties/description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/animals/{animalUUID}": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Get a single Animal from uuid",
+                "parameters": [
+                    {
+                        "name": "animalUUID",
+                        "in": "path",
+                        "description": "uuid of an animal",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Animal successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Animal/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Animal/properties/name"
+                                        },
+                                        "gender": {
+                                            "$ref": "#/components/schemas/Animal/properties/gender"
+                                        },
+                                        "age": {
+                                            "$ref": "#/components/schemas/Animal/properties/age"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Animal/properties/description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Edit an Animal",
+                "parameters": [
+                    {
+                        "name": "animalUUID",
+                        "in": "path",
+                        "description": "uuid of an animal",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Animal that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/Animal/properties/name"
+                                    },
+                                    "gender": {
+                                        "$ref": "#/components/schemas/Animal/properties/gender"
+                                    },
+                                    "age": {
+                                        "$ref": "#/components/schemas/Animal/properties/age"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Animal/properties/description"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Animal successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Animal/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Animal/properties/name"
+                                        },
+                                        "gender": {
+                                            "$ref": "#/components/schemas/Animal/properties/gender"
+                                        },
+                                        "age": {
+                                            "$ref": "#/components/schemas/Animal/properties/age"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Animal/properties/description"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Delete an Animal",
+                "parameters": [
+                    {
+                        "name": "animalUUID",
+                        "in": "path",
+                        "description": "uuid of an animal",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/animal_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/associations": {
+            "get": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Get all Associations",
+                "responses": {
+                    "200": {
+                        "description": "Association successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "uuid": {
+                                                        "$ref": "#/components/schemas/Association/properties/uuid"
+                                                    },
+                                                    "name": {
+                                                        "$ref": "#/components/schemas/Association/properties/name"
+                                                    },
+                                                    "logo": {
+                                                        "$ref": "#/components/schemas/Association/properties/logo"
+                                                    },
+                                                    "description": {
+                                                        "$ref": "#/components/schemas/Association/properties/description"
+                                                    },
+                                                    "phone": {
+                                                        "$ref": "#/components/schemas/Association/properties/phone"
+                                                    },
+                                                    "cellphone": {
+                                                        "$ref": "#/components/schemas/Association/properties/cellphone"
+                                                    },
+                                                    "email": {
+                                                        "$ref": "#/components/schemas/Association/properties/email"
+                                                    },
+                                                    "address": {
+                                                        "$ref": "#/components/schemas/Association/properties/address"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Add an Association",
+                "requestBody": {
+                    "description": "Association that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/Association/properties/name"
+                                    },
+                                    "logo": {
+                                        "$ref": "#/components/schemas/Association/properties/logo"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Association/properties/description"
+                                    },
+                                    "phone": {
+                                        "$ref": "#/components/schemas/Association/properties/phone"
+                                    },
+                                    "cellphone": {
+                                        "$ref": "#/components/schemas/Association/properties/cellphone"
+                                    },
+                                    "email": {
+                                        "$ref": "#/components/schemas/Association/properties/email"
+                                    },
+                                    "address": {
+                                        "$ref": "#/components/schemas/Association/properties/address"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Association successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Association/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Association/properties/name"
+                                        },
+                                        "logo": {
+                                            "$ref": "#/components/schemas/Association/properties/logo"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Association/properties/description"
+                                        },
+                                        "phone": {
+                                            "$ref": "#/components/schemas/Association/properties/phone"
+                                        },
+                                        "cellphone": {
+                                            "$ref": "#/components/schemas/Association/properties/cellphone"
+                                        },
+                                        "email": {
+                                            "$ref": "#/components/schemas/Association/properties/email"
+                                        },
+                                        "address": {
+                                            "$ref": "#/components/schemas/Association/properties/address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/association/{associationUUID}": {
+            "delete": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Delete an Association",
+                "parameters": [
+                    {
+                        "name": "associationUUID",
+                        "in": "path",
+                        "description": "uuid of an association",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/associations/{associationUUID}": {
+            "get": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Get a single Association from uuid",
+                "parameters": [
+                    {
+                        "name": "associationUUID",
+                        "in": "path",
+                        "description": "uuid of an association",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Association successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Association/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Association/properties/name"
+                                        },
+                                        "logo": {
+                                            "$ref": "#/components/schemas/Association/properties/logo"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Association/properties/description"
+                                        },
+                                        "phone": {
+                                            "$ref": "#/components/schemas/Association/properties/phone"
+                                        },
+                                        "cellphone": {
+                                            "$ref": "#/components/schemas/Association/properties/cellphone"
+                                        },
+                                        "email": {
+                                            "$ref": "#/components/schemas/Association/properties/email"
+                                        },
+                                        "address": {
+                                            "$ref": "#/components/schemas/Association/properties/address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Association"
+                ],
+                "summary": "Edit an Association",
+                "parameters": [
+                    {
+                        "name": "associationUUID",
+                        "in": "path",
+                        "description": "uuid of an association",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Association that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/Association/properties/name"
+                                    },
+                                    "logo": {
+                                        "$ref": "#/components/schemas/Association/properties/logo"
+                                    },
+                                    "description": {
+                                        "$ref": "#/components/schemas/Association/properties/description"
+                                    },
+                                    "phone": {
+                                        "$ref": "#/components/schemas/Association/properties/phone"
+                                    },
+                                    "cellphone": {
+                                        "$ref": "#/components/schemas/Association/properties/cellphone"
+                                    },
+                                    "email": {
+                                        "$ref": "#/components/schemas/Association/properties/email"
+                                    },
+                                    "address": {
+                                        "$ref": "#/components/schemas/Association/properties/address"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Association successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Association/properties/uuid"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Association/properties/name"
+                                        },
+                                        "logo": {
+                                            "$ref": "#/components/schemas/Association/properties/logo"
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Association/properties/description"
+                                        },
+                                        "phone": {
+                                            "$ref": "#/components/schemas/Association/properties/phone"
+                                        },
+                                        "cellphone": {
+                                            "$ref": "#/components/schemas/Association/properties/cellphone"
+                                        },
+                                        "email": {
+                                            "$ref": "#/components/schemas/Association/properties/email"
+                                        },
+                                        "address": {
+                                            "$ref": "#/components/schemas/Association/properties/address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/association_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/breeds": {
+            "get": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Get all Breeds",
+                "responses": {
+                    "200": {
+                        "description": "Breeds successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/Breed/properties/uuid"
+                                                    },
+                                                    "label": {
+                                                        "$ref": "#/components/schemas/Breed/properties/label"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Add a Breed",
+                "requestBody": {
+                    "description": "Breed that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Breed/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Breed successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Breed/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Breed/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/breeds/{breedUUID}": {
+            "get": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Get a single Breed from uuid",
+                "parameters": [
+                    {
+                        "name": "breedUUID",
+                        "in": "path",
+                        "description": "uuid of a breed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Breed successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Breed/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Breed/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Edit a Breed",
+                "parameters": [
+                    {
+                        "name": "breedUUID",
+                        "in": "path",
+                        "description": "uuid of a breed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Breed that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Breed/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Breed successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Breed/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Breed/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Breed"
+                ],
+                "summary": "Delete an Breed",
+                "parameters": [
+                    {
+                        "name": "breedUUID",
+                        "in": "path",
+                        "description": "uuid of an breed",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/breed_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/species": {
+            "get": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Get all Species",
+                "responses": {
+                    "200": {
+                        "description": "Species successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/Species/properties/uuid"
+                                                    },
+                                                    "label": {
+                                                        "$ref": "#/components/schemas/Species/properties/label"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Add a Species",
+                "requestBody": {
+                    "description": "Species that will be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Species/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Species successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "$ref": "#/components/schemas/Species/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Species/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/species/{speciesUUID}": {
+            "get": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Get a single Species from uuid",
+                "parameters": [
+                    {
+                        "name": "speciesUUID",
+                        "in": "path",
+                        "description": "uuid of a species",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Species successfully displayed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Species/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Species/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Edit a Species",
+                "parameters": [
+                    {
+                        "name": "speciesUUID",
+                        "in": "path",
+                        "description": "uuid of a species",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Species that will be edited",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "label": {
+                                        "$ref": "#/components/schemas/Species/properties/label"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Species successfully edited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Species/properties/uuid"
+                                        },
+                                        "label": {
+                                            "$ref": "#/components/schemas/Species/properties/label"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Species"
+                ],
+                "summary": "Delete an Species",
+                "parameters": [
+                    {
+                        "name": "speciesUUID",
+                        "in": "path",
+                        "description": "uuid of an species",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bd6bc279-2a0c-40cc-ae94-cb6c1697cf64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "no-content"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/species_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Animal": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Milou",
+                        "nullable": false
+                    },
+                    "gender": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "male",
+                            "female"
+                        ],
+                        "nullable": false
+                    },
+                    "age": {
+                        "type": "integer",
+                        "example": 10,
+                        "nullable": false
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Milou has been found on the street, ...",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Association": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Melt'in Pets",
+                        "nullable": false
+                    },
+                    "logo": {
+                        "type": "string",
+                        "example": "logo.png",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Melt'in Pets has been created in 2005, ...",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "0164585960",
+                        "nullable": false
+                    },
+                    "cellphone": {
+                        "type": "string",
+                        "example": "0664585960",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "contact@metingpets.fr",
+                        "nullable": false
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "42 Queen street",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Breed": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "label": {
+                        "type": "string",
+                        "example": "Berger Allemand",
+                        "nullable": false
+                    }
+                },
+                "type": "object"
+            },
+            "Species": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "0b6b9865-4583-48a6-959c-233cef91285a",
+                        "nullable": false
+                    },
+                    "dateCreation": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": false
+                    },
+                    "dateUpdate": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "deleted": {
+                        "type": "string",
+                        "example": "2020-05-11T14:00:00",
+                        "nullable": true
+                    },
+                    "label": {
+                        "type": "string",
+                        "example": "Chien",
+                        "nullable": false
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "animal_404": {
+                "description": "Animal not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "animalNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "association_404": {
+                "description": "Association not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "associationNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "breed_404": {
+                "description": "Breed not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "breedNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "error_500": {
+                "description": "Error: Internal Server Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "500"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "systemError"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "species_404": {
+                "description": "Species not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "code": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "404"
+                                },
+                                "message": {
+                                    "description": "Access those value with : #/components/responses/{response}",
+                                    "example": "speciesNotFound"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

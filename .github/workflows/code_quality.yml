@@ -1,0 +1,21 @@
+name: Code Quality
+on: [push]
+jobs:          
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    container: herloct/php-cs-fixer:2.3.2
+    steps:
+      - uses: actions/checkout@v2
+      - name:
+         Run PHP-CS Fixer with Symfony Rules Dry Run 
+        run:
+          php-cs-fixer fix . --rules=@Symfony
+          
+  security-checker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Update package
+      run: composer update
+    - name: Run security checker
+      run: php security-checker.phar security:check ./composer.lock
