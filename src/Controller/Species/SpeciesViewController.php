@@ -7,15 +7,22 @@ use App\Manager\Species\SpeciesViewManager;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SpeciesViewController extends AbstractFOSRestController
 {
     private $speciesViewManager;
+    private $serializer;
 
-    public function __construct(SpeciesViewManager $speciesViewManager)
-    {
+    public function __construct(
+        SpeciesViewManager $speciesViewManager,
+        SerializerInterface $serializer
+    ) {
         $this->speciesViewManager = $speciesViewManager;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -69,13 +76,24 @@ class SpeciesViewController extends AbstractFOSRestController
      *
      * @Rest\View(statusCode=200)
      */
-    public function getAll(): array
+    public function getAll(): JsonResponse
     {
         try {
             /** @var Species[] $species */
             $species = $this->speciesViewManager->getAll();
 
-            return ['data' => $species];
+            $context = new SerializationContext();
+            $context
+                ->setSerializeNull(true)
+                ->setGroups(['species_default']);
+
+            $json = $this->serializer->serialize(
+                $species,
+                'json',
+                $context
+            );
+
+            return new JsonResponse(['data' => json_decode($json)]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -137,13 +155,24 @@ class SpeciesViewController extends AbstractFOSRestController
      *
      * @Rest\View(statusCode=200)
      */
-    public function getOne(string $speciesUUID): Species
+    public function getOne(string $speciesUUID): JsonResponse
     {
         try {
             /** @var Species $species */
             $species = $this->speciesViewManager->get($speciesUUID);
 
-            return $species;
+            $context = new SerializationContext();
+            $context
+                ->setSerializeNull(true)
+                ->setGroups(['species_default']);
+
+            $json = $this->serializer->serialize(
+                $species,
+                'json',
+                $context
+            );
+
+            return new JsonResponse(json_decode($json));
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

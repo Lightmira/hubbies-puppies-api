@@ -7,15 +7,22 @@ use App\Manager\Breed\BreedViewManager;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class BreedViewController extends AbstractFOSRestController
 {
     private $breedViewManager;
+    private $serializer;
 
-    public function __construct(BreedViewManager $breedViewManager)
-    {
+    public function __construct(
+        BreedViewManager $breedViewManager,
+        SerializerInterface $serializer
+    ) {
         $this->breedViewManager = $breedViewManager;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -69,13 +76,24 @@ class BreedViewController extends AbstractFOSRestController
      *
      * @Rest\View(statusCode=200)
      */
-    public function getAll(): array
+    public function getAll(): JsonResponse
     {
         try {
             /** @var Breed[] $breeds */
             $breeds = $this->breedViewManager->getAll();
 
-            return ['data' => $breeds];
+            $context = new SerializationContext();
+            $context
+                ->setSerializeNull(true)
+                ->setGroups(['breed_default']);
+
+            $json = $this->serializer->serialize(
+                $breeds,
+                'json',
+                $context
+            );
+
+            return new JsonResponse(['data' => json_decode($json)]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -136,13 +154,24 @@ class BreedViewController extends AbstractFOSRestController
      *
      * @Rest\View(statusCode=200)
      */
-    public function getOne(string $breedUUID): Breed
+    public function getOne(string $breedUUID): JsonResponse
     {
         try {
             /** @var Breed $breed */
             $breed = $this->breedViewManager->get($breedUUID);
 
-            return $breed;
+            $context = new SerializationContext();
+            $context
+                ->setSerializeNull(true)
+                ->setGroups(['breed_default']);
+
+            $json = $this->serializer->serialize(
+                $breed,
+                'json',
+                $context
+            );
+
+            return new JsonResponse(json_decode($json));
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
