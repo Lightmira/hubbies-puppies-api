@@ -154,18 +154,21 @@ class Animal
     /**
      * @ORM\ManyToOne(targetEntity=Association::class, inversedBy="animals")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Groups({"animal_default"})
      */
     private $association;
 
     /**
      * @ORM\ManyToOne(targetEntity=Breed::class, inversedBy="animals")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Groups({"animal_default"})
      */
     private $breed;
 
     /**
      * @ORM\ManyToOne(targetEntity=Species::class, inversedBy="animals")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Groups({"animal_default"})
      */
     private $species;
 

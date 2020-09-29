@@ -4,6 +4,7 @@ namespace App\Controller\Species;
 
 use App\Entity\Species;
 use App\Manager\Species\SpeciesViewManager;
+use App\Services\Serializer\Serializer;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -19,7 +20,7 @@ class SpeciesViewController extends AbstractFOSRestController
 
     public function __construct(
         SpeciesViewManager $speciesViewManager,
-        SerializerInterface $serializer
+        Serializer $serializer
     ) {
         $this->speciesViewManager = $speciesViewManager;
         $this->serializer = $serializer;
@@ -81,17 +82,7 @@ class SpeciesViewController extends AbstractFOSRestController
         try {
             /** @var Species[] $species */
             $species = $this->speciesViewManager->getAll();
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['species_default']);
-
-            $json = $this->serializer->serialize(
-                $species,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($species, ['species_default']);
 
             return new JsonResponse(['data' => json_decode($json)]);
         } catch (Exception $e) {
@@ -160,17 +151,7 @@ class SpeciesViewController extends AbstractFOSRestController
         try {
             /** @var Species $species */
             $species = $this->speciesViewManager->get($speciesUUID);
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['species_default']);
-
-            $json = $this->serializer->serialize(
-                $species,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($species, ['species_default']);
 
             return new JsonResponse(json_decode($json));
         } catch (Exception $e) {

@@ -4,11 +4,10 @@ namespace App\Controller\Association;
 
 use App\Entity\Association;
 use App\Manager\Association\AssociationViewManager;
+use App\Services\Serializer\Serializer;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -19,7 +18,7 @@ class AssociationViewController extends AbstractFOSRestController
 
     public function __construct(
         AssociationViewManager $associationViewManager,
-        SerializerInterface $serializer
+        Serializer $serializer
     ) {
         $this->associationViewManager = $associationViewManager;
         $this->serializer = $serializer;
@@ -105,17 +104,7 @@ class AssociationViewController extends AbstractFOSRestController
         try {
             /** @var Association[] $associations */
             $associations = $this->associationViewManager->getAll();
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['association_default']);
-
-            $json = $this->serializer->serialize(
-                $associations,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($associations, ['association_default']);
 
             return new JsonResponse(['data' => json_decode($json)]);
         } catch (Exception $e) {
@@ -208,17 +197,7 @@ class AssociationViewController extends AbstractFOSRestController
         try {
             /** @var Association $association */
             $association = $this->associationViewManager->get($associationUUID);
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['association_default']);
-
-            $json = $this->serializer->serialize(
-                $association,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($association, ['association_default']);
 
             return new JsonResponse(json_decode($json));
         } catch (Exception $e) {

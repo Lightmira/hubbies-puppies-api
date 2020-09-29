@@ -4,6 +4,7 @@ namespace App\Controller\Breed;
 
 use App\Entity\Breed;
 use App\Manager\Breed\BreedViewManager;
+use App\Services\Serializer\Serializer;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -19,7 +20,7 @@ class BreedViewController extends AbstractFOSRestController
 
     public function __construct(
         BreedViewManager $breedViewManager,
-        SerializerInterface $serializer
+        Serializer $serializer
     ) {
         $this->breedViewManager = $breedViewManager;
         $this->serializer = $serializer;
@@ -81,17 +82,7 @@ class BreedViewController extends AbstractFOSRestController
         try {
             /** @var Breed[] $breeds */
             $breeds = $this->breedViewManager->getAll();
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['breed_default']);
-
-            $json = $this->serializer->serialize(
-                $breeds,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($breeds, ['breed_default']);
 
             return new JsonResponse(['data' => json_decode($json)]);
         } catch (Exception $e) {
@@ -159,17 +150,7 @@ class BreedViewController extends AbstractFOSRestController
         try {
             /** @var Breed $breed */
             $breed = $this->breedViewManager->get($breedUUID);
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['breed_default']);
-
-            $json = $this->serializer->serialize(
-                $breed,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($breed, ['breed_default']);
 
             return new JsonResponse(json_decode($json));
         } catch (Exception $e) {

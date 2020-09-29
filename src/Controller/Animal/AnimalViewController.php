@@ -4,11 +4,10 @@ namespace App\Controller\Animal;
 
 use App\Entity\Animal;
 use App\Manager\Animal\AnimalViewManager;
+use App\Services\Serializer\Serializer;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -19,7 +18,7 @@ class AnimalViewController extends AbstractFOSRestController
 
     public function __construct(
         AnimalViewManager $animalViewManager,
-        SerializerInterface $serializer
+        Serializer $serializer
     ) {
         $this->animalViewManager = $animalViewManager;
         $this->serializer = $serializer;
@@ -93,17 +92,12 @@ class AnimalViewController extends AbstractFOSRestController
         try {
             /** @var Animal[] $animals */
             $animals = $this->animalViewManager->getAll();
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['animal_default']);
-
-            $json = $this->serializer->serialize(
-                $animals,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($animals, [
+                'animal_default',
+                'breed_default',
+                'association_default',
+                'species_default'
+            ]);
 
             return new JsonResponse(['data' => json_decode($json)]);
         } catch (Exception $e) {
@@ -183,17 +177,12 @@ class AnimalViewController extends AbstractFOSRestController
         try {
             /** @var Animal $animal */
             $animal = $this->animalViewManager->get($animalUUID);
-
-            $context = new SerializationContext();
-            $context
-                ->setSerializeNull(true)
-                ->setGroups(['association_default']);
-
-            $json = $this->serializer->serialize(
-                $animal,
-                'json',
-                $context
-            );
+            $json = $this->serializer->serialize($animal, [
+                'animal_default',
+                'breed_default',
+                'association_default',
+                'species_default'
+            ]);
 
             return new JsonResponse(json_decode($json));
         } catch (Exception $e) {
